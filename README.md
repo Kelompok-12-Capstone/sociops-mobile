@@ -1,4 +1,4 @@
-# Tampilan Login Aplikasi
+# Task Update
 
 - [x] Tampilan
 - [x] Fungsional Tombol
@@ -6,4 +6,4 @@
 
 ## Tampilan
 
-![Tampilan](assets/images/layout.jpg)
+<img src="assets/images/layout.jpg" alt="Tampilan" width="500">
