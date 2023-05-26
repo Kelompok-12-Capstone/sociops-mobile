@@ -6,4 +6,4 @@
 
 ## Tampilan
 
-<img src="assets/images/layout.jpg" alt="Tampilan" width="500">
+<img src="assets/images/layout.jpg" alt="Tampilan" width="100">
