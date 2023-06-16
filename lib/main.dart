@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sociops/screen/fitur_campaign/Buat_Campaign.dart';
+import 'package:sociops/screen/fitur_campaign/komunitas/Buat_Komunitas.dart';
 import 'package:sociops/screen/splash_screen.dart';
 
 void main() {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Sociops',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const BuatCampaignScreen()
     );
   }
 }
