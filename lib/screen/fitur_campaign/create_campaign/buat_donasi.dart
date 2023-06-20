@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
-import 'package:sociops/screen/fitur_campaign/componen/image_collection.dart';
 import 'package:sociops/screen/fitur_campaign/componen/teks_form_field.dart';
 import 'package:sociops/screen/fitur_campaign/create_campaign/pengisian_donasi.dart';
 import 'package:sociops/style/color_style.dart';
@@ -68,9 +67,8 @@ class _BuatDonasiScreenState extends State<BuatDonasiScreen> {
                 const Padding(
                   padding: EdgeInsets.all(16),
                   child: CircleAvatar(
-                    radius: 100, // ukuran radius lingkaran
-                    backgroundImage:
-                        AssetImage(ImageCollection.profile), // path gambar Anda
+                    radius: 100,
+                    backgroundImage: AssetImage('assets/profile.png'),
                   ),
                 ),
                 Text(

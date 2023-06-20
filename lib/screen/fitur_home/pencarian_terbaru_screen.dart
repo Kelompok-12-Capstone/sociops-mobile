@@ -57,7 +57,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -81,7 +81,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -105,7 +105,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -129,7 +129,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -153,7 +153,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -177,7 +177,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -201,7 +201,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),
@@ -225,7 +225,7 @@ class PencarianTerbaru extends StatelessWidget {
                       ),
                       leading: const CircleAvatar(
                           backgroundImage:
-                              NetworkImage('assets/foto profil.png')),
+                              AssetImage('assets/foto profil.png')),
                       trailing: IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.close),

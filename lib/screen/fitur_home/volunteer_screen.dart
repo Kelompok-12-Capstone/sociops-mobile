@@ -121,7 +121,7 @@ class Volunteer extends StatelessWidget {
                               height: 200,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
+                                child: Image.asset(
                                   "assets/galang dana page.png",
                                   width: 10,
                                   height: 10,
@@ -348,7 +348,7 @@ class Volunteer extends StatelessWidget {
                               height: 200,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
+                                child: Image.asset(
                                   "assets/galang dana page.png",
                                   width: 10,
                                   height: 10,
@@ -575,7 +575,7 @@ class Volunteer extends StatelessWidget {
                               height: 200,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
+                                child: Image.asset(
                                   "assets/galang dana page.png",
                                   width: 10,
                                   height: 10,

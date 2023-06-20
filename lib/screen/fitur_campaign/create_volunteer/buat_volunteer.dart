@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
-import 'package:sociops/screen/fitur_campaign/componen/image_collection.dart';
 import 'package:sociops/screen/fitur_campaign/componen/teks_form_field.dart';
 import 'package:sociops/screen/fitur_campaign/create_volunteer/Upload_volunteer.dart';
 import 'package:sociops/style/color_style.dart';
@@ -72,7 +71,7 @@ class _BuatVolunteerScreenState extends State<BuatVolunteerScreen> {
                   padding: EdgeInsets.all(16),
                   child: CircleAvatar(
                     radius: 100,
-                    backgroundImage: AssetImage(ImageCollection.profile),
+                    backgroundImage: AssetImage('assets/profile.png'),
                   ),
                 ),
                 Text(

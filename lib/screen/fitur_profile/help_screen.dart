@@ -44,7 +44,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 height: 64,
                 child: TextButton.icon(
                   icon: const Icon(
-                    Icons.emoji_emotions_outlined,
+                    Icons.question_answer_outlined,
                     color: Colors.black,
                   ),
                   style: ButtonStyle(
@@ -103,7 +103,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 height: 64,
                 child: TextButton.icon(
                   icon: const Icon(
-                    Icons.emoji_emotions_outlined,
+                    Icons.call_outlined,
                     color: Colors.black,
                   ),
                   style: ButtonStyle(
@@ -162,7 +162,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 height: 64,
                 child: TextButton.icon(
                   icon: const Icon(
-                    Icons.emoji_emotions_outlined,
+                    Icons.speaker_notes_outlined,
                     color: Colors.black,
                   ),
                   style: ButtonStyle(
@@ -222,7 +222,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 height: 64,
                 child: TextButton.icon(
                   icon: const Icon(
-                    Icons.emoji_emotions_outlined,
+                    Icons.policy_outlined,
                     color: Colors.black,
                   ),
                   style: ButtonStyle(

@@ -93,7 +93,7 @@ class _CustomFollowButtonState extends State<CustomFollowButton> {
                   height: 200,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
+                    child: Image.asset(
                       "assets/hyundai.jpg",
                       fit: BoxFit.cover,
                     ),
@@ -251,7 +251,7 @@ class _CustomFollowButtonState extends State<CustomFollowButton> {
                 '1 Aksi = Rp10.000',
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w500,
-                  fontSize: 16,
+                  fontSize: 14,
                   color: const Color(0xFF039855),
                 ),
               ),

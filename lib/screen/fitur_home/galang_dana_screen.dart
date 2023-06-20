@@ -119,7 +119,7 @@ class GalangDana extends StatelessWidget {
                               height: 200,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
+                                child: Image.asset(
                                   "assets/contoh1.png",
                                   fit: BoxFit.cover,
                                 ),
@@ -255,7 +255,7 @@ class GalangDana extends StatelessWidget {
                             '1 Aksi = Rp10.000',
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 14,
                               color: const Color(0xFF039855),
                             ),
                           ),
@@ -347,7 +347,7 @@ class GalangDana extends StatelessWidget {
                               height: 200,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
+                                child: Image.asset(
                                   "assets/contoh1.png",
                                   fit: BoxFit.cover,
                                 ),
@@ -483,7 +483,7 @@ class GalangDana extends StatelessWidget {
                             '1 Aksi = Rp10.000',
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 14,
                               color: const Color(0xFF039855),
                             ),
                           ),
@@ -575,7 +575,7 @@ class GalangDana extends StatelessWidget {
                               height: 200,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
+                                child: Image.asset(
                                   "assets/contoh1.png",
                                   fit: BoxFit.cover,
                                 ),
@@ -711,7 +711,7 @@ class GalangDana extends StatelessWidget {
                             '1 Aksi = Rp10.000',
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 14,
                               color: const Color(0xFF039855),
                             ),
                           ),
