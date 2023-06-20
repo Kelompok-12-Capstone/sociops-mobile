@@ -46,89 +46,92 @@ class _BuatDonasiScreenState extends State<BuatDonasiScreen> {
           style: FontFamily().mediumteks.copyWith(fontSize: 24),
         ),
         elevation: 0.0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         leading: const BackButton(
           color: Color(0XFF444CE7),
         ),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Text(
-                  'Profile Organizer',
-                  style: FontFamily()
-                      .mediumteks
-                      .copyWith(fontSize: 24, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(height: 24),
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: AssetImage('assets/profile.png'),
+      body: Container(
+        color: Colors.white,
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Text(
+                    'Profile Organizer',
+                    style: FontFamily()
+                        .mediumteks
+                        .copyWith(fontSize: 24, fontWeight: FontWeight.w600),
                   ),
-                ),
-                Text(
-                  "Thiyara Al-Mawaddah",
-                  style: FontFamily().mediumteks,
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      TeksFormField(hinText: "Tambah Lokasi Campaign"),
-                      const SizedBox(height: 8),
-                      Container(
-                        width: 396, // atur lebar kontainer sesuai kebutuhan
-                        height: 54, // atur tinggi kontainer sesuai kebutuhan
-                        decoration: BoxDecoration(
-                          border: Border.all(color: ColorStyle().primaryblue),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              _startDate != null && _endDate != null
-                                  ? '  ${_dateFormat.format(_startDate!)} - ${_dateFormat.format(_endDate!)}'
-                                  : '  Tambahkan periode campaign',
-                              style: FontFamily()
-                                  .mediumteks
-                                  .copyWith(fontSize: 14),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                _selectDateRange(context);
-                              },
-                              icon: Icon(Icons.arrow_drop_down_circle,
-                                  color: ColorStyle().primaryblue),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 100),
-                      ButtonPrimay(
-                          teks: "Selanjutnya",
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    (const PengisianDonasiScreen()),
+                  const SizedBox(height: 24),
+                  const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: CircleAvatar(
+                      radius: 100,
+                      backgroundImage: AssetImage('assets/profile.jpg'),
+                    ),
+                  ),
+                  Text(
+                    "Thiyara Al-Mawaddah",
+                    style: FontFamily().mediumteks,
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        TeksFormField(hinText: "Tambah Lokasi Campaign"),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: 396, // atur lebar kontainer sesuai kebutuhan
+                          height: 54, // atur tinggi kontainer sesuai kebutuhan
+                          decoration: BoxDecoration(
+                            border: Border.all(color: ColorStyle().primaryblue),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _startDate != null && _endDate != null
+                                    ? '  ${_dateFormat.format(_startDate!)} - ${_dateFormat.format(_endDate!)}'
+                                    : '  Tambahkan periode campaign',
+                                style: FontFamily()
+                                    .mediumteks
+                                    .copyWith(fontSize: 14),
                               ),
-                            );
-                          }),
-                    ],
-                  ),
-                )
-              ],
+                              IconButton(
+                                onPressed: () {
+                                  _selectDateRange(context);
+                                },
+                                icon: Icon(Icons.arrow_drop_down_circle,
+                                    color: ColorStyle().primaryblue),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 100),
+                        ButtonPrimay(
+                            teks: "Selanjutnya",
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      (const PengisianDonasiScreen()),
+                                ),
+                              );
+                            }),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
