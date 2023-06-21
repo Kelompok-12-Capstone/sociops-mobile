@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sociops/screen/fitur_donation/code_payment_screen.dart';
+import 'package:sociops/screen/fitur_donation/model/payment_method_model.dart';
+import 'package:sociops/screen/fitur_donation/service/payment_method_service.dart';
+// import 'package:sociops/screen/fitur_donation/model/payment_method_model.dart';
+// import 'package:sociops/screen/fitur_donation/service/payment_method_service.dart';
 
 // ignore: must_be_immutable
 class ConfirmPaymentScreen extends StatefulWidget {
@@ -14,6 +18,28 @@ class ConfirmPaymentScreen extends StatefulWidget {
 }
 
 class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
+  List<PaymentMethod> paymentMethods = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getPaymentMethods();
+  }
+
+  void getPaymentMethods() {
+    ApiPaymentMethodService.fetchPaymentMethods().then((response) {
+      if (response.statusCode == 200) {
+        setState(() {
+          final List<dynamic> data = response.data['data'];
+          paymentMethods =
+              data.map((json) => PaymentMethod.fromJson(json)).toList();
+        });
+      } else {
+        throw Exception('Failed to fetch payment methods');
+      }
+    }).catchError((error) {});
+  }
+
   final int fee = 1000;
 
   String? selectedPaymentMethod;
@@ -131,20 +157,35 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                             borderSide: BorderSide.none,
                           ),
                         ),
-                        items: <String>[
-                          'BNI Virtual Account',
-                          'BRI Virtual Account',
-                          'BCA Virtual Account',
-                          'Gopay'
-                        ].map<DropdownMenuItem<String>>((String value) {
+                        dropdownColor: Colors.white,
+                        value: selectedPaymentMethod,
+                        items: paymentMethods.map((paymentMethod) {
                           return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
+                            value: paymentMethod.name,
+                            child: Row(
+                              children: [
+                                Image.network(
+                                  paymentMethod.image,
+                                  height: 40,
+                                  width: 40,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  paymentMethod.name,
+                                  style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         }).toList(),
                         onChanged: (String? newValue) {
-                          selectedPaymentMethod = newValue;
-                          checkButtonStatus();
+                          setState(() {
+                            selectedPaymentMethod = newValue;
+                            checkButtonStatus();
+                          });
                         },
                       ),
                     ),

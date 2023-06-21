@@ -3,22 +3,28 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sociops/screen/bottom_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:core';
 import 'dart:math';
 
-import 'package:sociops/screen/fitur_donation/success_payment_screen.dart';
-
 // ignore: must_be_immutable
-class CodePaymentScreen extends StatelessWidget {
+class CodePaymentScreen extends StatefulWidget {
   final String selectedAmount;
   final String? selectedPaymentMethod;
-  final int fee = 1000;
 
-  CodePaymentScreen(
+  const CodePaymentScreen(
       {Key? key, required this.selectedAmount, this.selectedPaymentMethod})
       : super(key: key);
 
+  @override
+  State<CodePaymentScreen> createState() => _CodePaymentScreenState();
+}
+
+class _CodePaymentScreenState extends State<CodePaymentScreen> {
+  final int fee = 1000;
+
   DateTime transactionDate = DateTime.now();
+
   DateTime paymentDeadline = DateTime.now()
       .add(const Duration(days: 1))
       .subtract(const Duration(seconds: 1));
@@ -52,6 +58,14 @@ class CodePaymentScreen extends StatelessWidget {
       default:
         return '';
     }
+  }
+
+  String generatedCode = '';
+
+  @override
+  void initState() {
+    super.initState();
+    generatedCode = generateRandomCode();
   }
 
   String generateRandomCode() {
@@ -97,7 +111,7 @@ class CodePaymentScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Complete the payment of Rp${NumberFormat('#,##0').format(int.parse(selectedAmount) + fee)}',
+                  'Complete the payment of Rp${NumberFormat('#,##0').format(int.parse(widget.selectedAmount) + fee)}',
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
@@ -127,7 +141,7 @@ class CodePaymentScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: 16),
                       Text(
-                        '$selectedPaymentMethod',
+                        '${widget.selectedPaymentMethod}',
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -143,7 +157,7 @@ class CodePaymentScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        generateRandomCode(),
+                        generatedCode,
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
@@ -155,8 +169,8 @@ class CodePaymentScreen extends StatelessWidget {
                         height: 48,
                         child: TextButton.icon(
                           onPressed: () {
-                            const textToCopy = 'D3-12RBHSJ';
-                            copyToClipboard(textToCopy);
+                            Clipboard.setData(
+                                ClipboardData(text: generatedCode));
                           },
                           icon: const Icon(
                             Icons.copy_outlined,
@@ -216,15 +230,10 @@ class CodePaymentScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SuccessPaymentScreen(),
-                        ),
-                      );
+                      // launch(mobile_deeplink_checkout_url);
                     },
                     child: Text(
-                      'Pergi ke midtrans',
+                      'Pergi ke xendit',
                       style: GoogleFonts.inter(
                         color: Colors.white,
                         fontSize: 18,
