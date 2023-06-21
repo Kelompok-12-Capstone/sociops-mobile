@@ -1,7 +1,14 @@
+// import 'package:dio/dio.dart' as dio; // Importing Dio with an alias
+// import 'package:get/get_connect/http/src/response/response.dart' as getConnect; // Importing GetConnect Response with an alias
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sociops/screen/login_screen.dart';
-import 'package:sociops/style/color_style.dart';
+
+import '../provider/button_register.dart';
+import '../provider/teksfieldDaffa.dart';
+import '../provider/user/register_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,9 +19,19 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool isObscureText = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  ////kondisi///
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final registerProvider = Provider.of<RegisterProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -56,139 +73,98 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           const SizedBox(height: 20),
                           SizedBox(
-                            width: 396,
-                            height: 72,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Email',
-                                filled: true,
-                                fillColor: const Color(0XFFF9FAFB),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: 396,
-                            height: 72,
-                            child: TextFormField(
-                              obscureText: isObscureText,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isObscureText = !isObscureText;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    isObscureText
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                  ),
-                                ),
-                                labelText: 'Kata sandi',
-                                filled: true,
-                                fillColor: Colors.grey[50],
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          SizedBox(
-                            width: 396,
-                            height: 60,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32.0),
-                                  ),
-                                ),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  ColorStyle().primaryblue,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "Buat akun",
-                                style: GoogleFonts.inter(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Row(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Divider(),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    'Atau lanjutkan dengan',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                    ),
+                                textFormRegistrasi(
+                                    labelText: "nama",
+                                    onChanged: (value) {
+                                      registerProvider.validateuserName(value);
+                                    },
+                                    controller:
+                                        registerProvider.userNameController,
+                                    hintText: 'masukkan nama kamu',
+                                    errorMessage:
+                                        registerProvider.erroruserNameMessage,
+                                    isValidTextField:
+                                        registerProvider.isuserNameValid),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                textFormRegistrasi(
+                                    labelText: "email",
+                                    onChanged: (value) {
+                                      registerProvider.validateEmail(value);
+                                    },
+                                    controller:
+                                        registerProvider.emailController,
+                                    hintText: 'Capstone11@gmail.com',
+                                    errorMessage:
+                                        registerProvider.errorEmailMessage,
+                                    isValidTextField:
+                                        registerProvider.isEmailValid),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                textFormRegistrasi(
+                                  labelText: "password",
+                                  onChanged: (value) {
+                                    registerProvider.validatePassword(value);
+                                  },
+                                  controller:
+                                      registerProvider.passwordController,
+                                  hintText: 'password',
+                                  errorMessage:
+                                      registerProvider.errorPasswordMessage,
+                                  isValidTextField:
+                                      registerProvider.isPasswordValid,
+                                  isObsucreText:
+                                      registerProvider.isHidePassword,
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      registerProvider.showHidePassword();
+                                    },
+                                    icon: registerProvider.isHidePassword
+                                        ? const Icon(Icons.remove_red_eye)
+                                        : const Icon(
+                                            Icons.visibility_off,
+                                          ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Divider(),
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            width: 396,
-                            height: 56,
-                            child: OutlinedButton(
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(56.0),
-                                  ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Column(
+                              children: [
+                                ButtonRegister(
+                                  isIcon: true,
+                                  onPressed: () {
+                                    registerProvider.register(
+                                        context); // Perbarui RegisterProvider dan reset nilai formulir
+
+                                    registerProvider.emailController.clear();
+                                    registerProvider.passwordController.clear();
+                                    registerProvider.userNameController.clear();
+                                  },
+                                  title: "Buat Akun",
                                 ),
-                              ),
-                              onPressed: () {},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(Icons.phone_android_outlined),
-                                  Text(
-                                    'Nomor telephone',
-                                    style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                ],
-                              ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 156),
+                          const SizedBox(height: 100),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

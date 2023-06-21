@@ -9,7 +9,7 @@ class FontFamily {
       fontSize: 14,
       color: ColorStyle().primarydark);
 
-  TextStyle secondary = GoogleFonts.roboto(
+  TextStyle secondary = GoogleFonts.inter(
       fontWeight: FontWeight.w400,
       fontSize: 14,
       color: ColorStyle().primarydark);

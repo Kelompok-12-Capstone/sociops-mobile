@@ -6,6 +6,9 @@ import 'package:sociops/screen/fitur_profile/notification_screen.dart';
 import 'package:sociops/screen/profile_screen.dart';
 import 'package:sociops/screen/fitur_profile/security_screen.dart';
 
+import '../../provider/user/save_toke.dart';
+import '../login_screen.dart';
+
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
@@ -323,14 +326,23 @@ class _SettingScreenState extends State<SettingScreen> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const ProfileScreen(),
-                                  ),
-                                );
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                    (route) => false);
+                                SharedPref.removeToken();
                               },
+                              // onPressed: () {
+                              //   Navigator.pop(context);
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => const ProfileScreen(),
+                              //     ),
+                              //   );
+                              // },
                               child: const Text('Keluar'),
                             ),
                           ],

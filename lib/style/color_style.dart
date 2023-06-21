@@ -13,7 +13,6 @@ class ColorStyle {
 
   Color white = const Color(0xffFFFFFF);
 
-  Color red = Color.fromARGB(255, 212, 13, 13);
 
   Color greenbackground = const Color(0XffECFDF3);
 
