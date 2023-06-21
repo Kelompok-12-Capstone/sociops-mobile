@@ -1,9 +1,12 @@
+// ignore_for_file: unused_field
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sociops/screen/profile_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -18,6 +21,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final ImagePicker _picker = ImagePicker();
   List<XFile>? _imageFileList;
   dynamic _pickImageError;
+
+  String? uploadedImage;
+  String? fullName;
 
   Future<void> _onImageButtonPressed(ImageSource source) async {
     try {
@@ -40,6 +46,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (file != null) {
       setState(() {
         _imageFileList = [file];
+        uploadedImage = file.path;
       });
     }
   }
@@ -177,6 +184,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          fullName = value;
+                        });
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -196,65 +208,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  SizedBox(
-                    width: 396,
-                    height: 72,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Phone number',
-                        filled: true,
-                        fillColor: const Color(0XFFF9FAFB),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: 396,
-                    height: 72,
-                    child: DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        labelText: 'Gender',
-                        filled: true,
-                        fillColor: const Color(0XFFF9FAFB),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                      items: <String>['Laki-laki', 'Perempuan']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {},
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: 396,
-                    height: 72,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Location',
-                        filled: true,
-                        fillColor: const Color(0XFFF9FAFB),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 340),
                 ],
               ),
             ),
@@ -279,7 +233,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                      uploadedImage: File(_imageFileList![0].path),
+                      fullName: fullName,
+                    ),
+                  ),
+                );
+              },
               child: Text(
                 'Lanjutkan',
                 style: GoogleFonts.inter(
