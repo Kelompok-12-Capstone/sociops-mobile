@@ -4,7 +4,6 @@ import 'package:readmore/readmore.dart';
 import 'package:sociops/screen/fitur_volunteer/ambil_aksi_screen.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/widget/button_bar.dart';
-import 'aksi_volunteer_screen.dart';
 
 class DetailVolunteer extends StatefulWidget {
   const DetailVolunteer({super.key});
@@ -351,12 +350,7 @@ class _DetailVolunteerState extends State<DetailVolunteer> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(20),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (contex) => const AksiScreen()));
-                    },
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 4,
@@ -390,12 +384,7 @@ class _DetailVolunteerState extends State<DetailVolunteer> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(20),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (contex) => const AksiScreen()));
-                    },
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 4,

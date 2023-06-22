@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart';
+import 'package:sociops/screen/fitur_volunteer/aksi_volunteer_screen.dart';
 import 'package:sociops/screen/fitur_volunteer/ambil_aksi_screen.dart';
 
 class Button {
@@ -48,7 +50,14 @@ class Button {
           ),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context as BuildContext,
+          MaterialPageRoute(
+            builder: (context) => const AksiScreen(),
+          ),
+        );
+      },
       child: Text(
         'Lihat Selengkapnya',
         style: GoogleFonts.inter(
