@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sociops/screen/login_screen.dart';
 
 import '../provider/button_register.dart';
-import '../provider/teksfieldDaffa.dart';
+import '../provider/teksfield_register.dart';
 import '../provider/user/register_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
