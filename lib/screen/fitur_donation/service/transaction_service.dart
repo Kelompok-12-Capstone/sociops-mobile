@@ -13,13 +13,24 @@ class TransactionService {
     return _dio;
   }
 
-  static Future<Response> createTransaction(
-      Map<String, dynamic> transactionData) async {
+  static Future<Response> createTransaction({
+    int? amount,
+    String? currency,
+    int? paymentID,
+    int? campaignID,
+  }) async {
     try {
-      final response = await dioInstance.post(apiUrl, data: transactionData);
+      final response = await dioInstance.post(apiUrl, data: {
+        "amount": amount,
+        "currency": "IDR",
+        "payment_id": paymentID,
+        "campaign_id": 1
+      });
+      print(response.data);
       return response;
-    } catch (error) {
-      throw Exception('Failed to create transaction');
+    } on DioError catch (error) {
+      print(error.response?.data);
+      throw Exception('Failed to create transaction $error');
     }
   }
 }

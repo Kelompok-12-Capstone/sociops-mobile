@@ -4,8 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:sociops/screen/fitur_donation/code_payment_screen.dart';
 import 'package:sociops/screen/fitur_donation/model/payment_method_model.dart';
 import 'package:sociops/screen/fitur_donation/service/payment_method_service.dart';
-// import 'package:sociops/screen/fitur_donation/model/payment_method_model.dart';
-// import 'package:sociops/screen/fitur_donation/service/payment_method_service.dart';
+import 'package:sociops/screen/fitur_donation/service/transaction_service.dart';
 
 // ignore: must_be_immutable
 class ConfirmPaymentScreen extends StatefulWidget {
@@ -38,6 +37,18 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
         throw Exception('Failed to fetch payment methods');
       }
     }).catchError((error) {});
+  }
+
+  Future<void> _createTransaction(String amount, int paymentID) async {
+    try {
+      final response = await TransactionService.createTransaction(
+        amount: int.parse(amount),
+        paymentID: paymentID,
+      );
+      print(response.data);
+    } catch (error) {
+      print('Error creating transaction: $error');
+    }
   }
 
   final int fee = 1000;
@@ -161,7 +172,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                         value: selectedPaymentMethod,
                         items: paymentMethods.map((paymentMethod) {
                           return DropdownMenuItem<String>(
-                            value: paymentMethod.name,
+                            value: paymentMethod.id.toString(),
                             child: Row(
                               children: [
                                 Image.network(
@@ -289,6 +300,23 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                   ),
                 ),
               ),
+              // onPressed: isButtonDisabled
+              //     ? null
+              //     : () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => CodePaymentScreen(
+              //               selectedAmount: widget.selectedAmount,
+              //               selectedPaymentMethod: selectedPaymentMethod!,
+              //             ),
+              //           ),
+              //         );
+              //         _createTransaction(
+              //           widget.selectedAmount,
+              //           selectedPaymentMethod!,
+              //         );
+              //       },
               onPressed: isButtonDisabled
                   ? null
                   : () {
@@ -300,7 +328,16 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                             selectedPaymentMethod: selectedPaymentMethod!,
                           ),
                         ),
-                      );
+                      ).then((value) {
+                        if (value != null) {
+                          _createTransaction(
+                            widget.selectedAmount,
+                            int.parse(selectedPaymentMethod!),
+                          );
+                          print(
+                              '${widget.selectedAmount} dan ${selectedPaymentMethod}');
+                        }
+                      });
                     },
               child: Text(
                 'Bayar',

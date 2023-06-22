@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sociops/screen/bottom_screen.dart';
+import 'package:sociops/screen/fitur_donation/select_payment_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Sociops',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      home: const BottomNavbarScreen(),
+      home: const SelectPaymentScreen(),
     );
   }
 }

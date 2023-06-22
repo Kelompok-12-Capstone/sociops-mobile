@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sociops/screen/fitur_donation/confirm_payment_screen.dart';
+import 'package:sociops/screen/fitur_donation/service/transaction_service.dart';
 
 class SelectPaymentScreen extends StatefulWidget {
   const SelectPaymentScreen({super.key});
@@ -35,6 +36,18 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
   bool isButtonDisabled = true;
 
   static const Color disabledButtonColor = Color(0XFFC7D7FE);
+
+  final TransactionService transactionService = TransactionService();
+
+  void checkButtonStatus() {
+    setState(() {
+      if (_selectedIndex == -1 && selectedAmount.isEmpty) {
+        isButtonDisabled = true;
+      } else {
+        isButtonDisabled = false;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -230,25 +243,4 @@ class _SelectPaymentScreenState extends State<SelectPaymentScreen> {
       ),
     );
   }
-
-  void checkButtonStatus() {
-    setState(() {
-      if (_selectedIndex == -1 && selectedAmount.isEmpty) {
-        isButtonDisabled = true;
-      } else {
-        isButtonDisabled = false;
-      }
-    });
-  }
-
-  // void checkButtonStatus() {
-  //   setState(() {
-  //     if ((_selectedIndex != -1 && selectedAmount.isNotEmpty) ||
-  //         (_selectedIndex == -1 && selectedAmount.isEmpty)) {
-  //       isButtonDisabled = true;
-  //     } else {
-  //       isButtonDisabled = false;
-  //     }
-  //   });
-  // }
 }
