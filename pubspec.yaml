@@ -24,6 +24,10 @@ dependencies:
   intl: ^0.18.1
   image_picker: ^0.8.9
   giff_dialog: ^1.0.1
+  dio: ^5.1.2
+  email_validator: ^2.1.17
+  provider: ^6.0.5
+  shared_preferences: ^2.1.0
 
 dev_dependencies:
   flutter_test:
