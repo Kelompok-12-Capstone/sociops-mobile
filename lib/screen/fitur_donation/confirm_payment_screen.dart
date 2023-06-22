@@ -334,8 +334,6 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                             widget.selectedAmount,
                             int.parse(selectedPaymentMethod!),
                           );
-                          print(
-                              '${widget.selectedAmount} dan ${selectedPaymentMethod}');
                         }
                       });
                     },
