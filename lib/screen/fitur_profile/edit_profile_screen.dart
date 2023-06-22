@@ -238,7 +238,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ProfileScreen(
-                      uploadedImage: uploadedImage,
+                      uploadedImage: File(_imageFileList![0].path),
                       fullName: fullName,
                     ),
                   ),

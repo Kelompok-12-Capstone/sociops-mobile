@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:sociops/db/database_helper.dart';
 import 'package:sociops/screen/fitur_profile/edit_profile_screen.dart';
 import 'package:sociops/screen/fitur_profile/setting_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final String? uploadedImage;
+  final File? uploadedImage;
   final String? fullName;
 
   const ProfileScreen({super.key, this.uploadedImage, this.fullName});
@@ -16,8 +17,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String? uploadedImage;
-  String? fullName;
+  File? _uploadedImage;
+  String? _fullName;
+
+  @override
+  void initState() {
+    // getProfileData();
+    super.initState();
+    if (widget.uploadedImage != null && widget.fullName != null) {
+      _uploadedImage = widget.uploadedImage;
+      _fullName = widget.fullName;
+    }
+  }
+
+  //   void getProfileData() async {
+  //   _dataProfileData = await DatabaseHelper().getProfileData();
+
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +86,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 40),
                 Stack(
                   children: [
-                    if (uploadedImage != null)
+                    if (_uploadedImage != null)
                       ClipOval(
                         child: Image.file(
-                          File(uploadedImage!),
+                          _uploadedImage!,
                           width: 160,
                           height: 160,
                           fit: BoxFit.cover,
@@ -117,9 +134,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                if (fullName != null)
+                if (_fullName != null)
                   Text(
-                    fullName!,
+                    _fullName!,
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
