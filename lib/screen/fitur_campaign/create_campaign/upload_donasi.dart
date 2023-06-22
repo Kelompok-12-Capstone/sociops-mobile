@@ -13,6 +13,18 @@ class UploadDonasiScreen extends StatefulWidget {
 }
 
 class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
+  // BuatVolunteerService buatVolunteerService = BuatVolunteerService();
+  // TextEditingController titleController = TextEditingController();
+  // TextEditingController categoryController = TextEditingController();
+  // TextEditingController aboutController = TextEditingController();
+  // TextEditingController storyController = TextEditingController();
+  // TextEditingController proposalController = TextEditingController();
+  // TextEditingController imageController = TextEditingController();
+  // TextEditingController videoController = TextEditingController();
+  // TextEditingController hastagController = TextEditingController();
+
+
+
   String selectedCategory = '';
   bool isObscureText = true;
   SizedBox tinggi = const SizedBox(height: 12);
@@ -61,12 +73,22 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Judul', style: FontFamily().mediumteks),
                   ),
-                  TeksFormField(hinText: "Tulis"),
+                  TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(), 
+                      hintText: "Tulis",
+                    ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text('Hastag', style: FontFamily().mediumteks),
                   ),
-                  TeksFormField(hinText: "Tambahkan tag dengan diawali #"),
+                  TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(), 
+                      hintText: "Tambahkan tag dengan diawali #",
+                    ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text('Kategori', style: FontFamily().mediumteks),
@@ -137,16 +159,15 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
                           border: Border.all(color: ColorStyle().primaryblue)),
-                      child: const TextField(
-                        // controller: controler,
+                      child: TextField(
                         textCapitalization: TextCapitalization.sentences,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             border: InputBorder.none,
 
                             // filled: true,
                             // isDense: true,
 
-                            hintText: '  Detail Campaign'),
+                            hintText: 'Detail Campaign'),
                       ),
                     ),
                   ),
@@ -154,25 +175,42 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Cerita', style: FontFamily().mediumteks),
                   ),
+                    TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(), 
+                      hintText: "Cerita dibuatnya Campaign",
+                    ),),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text('Langkah Aksi', style: FontFamily().mediumteks),
+                  ),
+                    const TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(), 
+                      hintText: "Tuliskan Langkah",
+                    ),
+                  ),
                   IconButtonFormField(teks: "Tambah Aksi", icon: Icons.add),
-                  const SizedBox(height: 18),
-                  ButtonPrimay(
-                      teks: "Selanjutnya",
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                (const PengajuanDonasiScreen()),
-                          ),
-                        );
-                      }),
-                ],
-              ),
+                const SizedBox(height: 18),
+                ElevatedButton(
+                  child: const Text(
+                    'Selanjutnya'
+                    ),
+                    onPressed: () async {
+                      
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => (const PengajuanDonasiScreen()),
+                        ),
+                      );
+                   
+                    }),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+        ),]
+              ),   
+              ),
+        );
   }
 }

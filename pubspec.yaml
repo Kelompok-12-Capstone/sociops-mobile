@@ -22,6 +22,7 @@ dependencies:
   intl: ^0.18.1
   image_picker: ^0.8.9
   giff_dialog: ^1.0.1
+<<<<<<< Updated upstream
   shared_preferences: ^2.1.2
   sqflite: ^2.2.8+4
   path: ^1.8.3
@@ -29,6 +30,10 @@ dependencies:
   dio: ^5.2.1+1
   provider: ^6.0.5
   get: ^4.6.5
+=======
+  dio: ^5.1.1
+  http: ^0.13.3
+>>>>>>> Stashed changes
 
 dev_dependencies:
   flutter_test:
@@ -39,6 +44,7 @@ flutter:
   uses-material-design: true
 
   assets:
+<<<<<<< Updated upstream
     - assets/
     - assets/handoff/
     - assets/handoff/foto/
@@ -61,3 +67,32 @@ flutter:
     - assets/fundraising.png
     - assets/promosi.png
     - assets/organizer.png
+=======
+  - assets/
+  - assets/handoff/
+  - assets/handoff/foto/
+  - assets/handoff/icon/
+  - assets/create.png
+  - assets/house.png
+  - assets/home.png
+  - assets/search.png
+  - assets/result_image.png
+  - assets/bookmark.png
+  - assets/galang dana.png
+  - assets/volunteerr.png
+  - assets/galang dana page.png
+  - assets/volunteer page.png
+  - assets/foto profil.png
+  - assets/volunteer.png
+  - assets/campaign.png
+  - assets/komunitas.png
+  - assets/bookmark (2).png
+  - assets/fundraising.png
+  - assets/promosi.png
+  - assets/organizer.png
+  - assets/give-love.png
+  - assets/community.png
+  - assets/hyundai.jpg
+  - assets/notifikasi.png
+  - assets/sepatu.png
+>>>>>>> Stashed changes

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
-import 'package:sociops/screen/fitur_campaign/componen/image_collection.dart';
 import 'package:sociops/screen/fitur_campaign/componen/teks_form_field.dart';
 import 'package:sociops/screen/fitur_campaign/create_campaign/pengajuan_donasi.dart';
+import 'package:sociops/service/donasi_service.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
 
@@ -15,6 +15,25 @@ class PengisianDonasiScreen extends StatefulWidget {
 }
 
 class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
+  final ApiService apiService = ApiService();
+  final TextEditingController targetRecipientController = TextEditingController();
+  final TextEditingController proposalController = TextEditingController();
+  final TextEditingController detailActionDonationController = TextEditingController();
+  final TextEditingController totalActionDonationController = TextEditingController();
+
+  void _postData() {
+    // ignore: unused_local_variable
+    final targetRecipient = targetRecipientController.text;
+    // ignore: unused_local_variable
+    final proposal = proposalController.text;
+    // ignore: unused_local_variable
+    final detailActionDonation = detailActionDonationController.text;
+    // ignore: unused_local_variable
+    final totalActionDonation = totalActionDonationController.text;
+
+    apiService.postData(targetRecipient, proposal, detailActionDonation, totalActionDonation as int );
+  }
+
   bool _switchValue = false;
   String selectedCategory = '';
   bool isObscureText = true;
@@ -45,7 +64,8 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 20),
-                      child: Text('Penerima Donasi',
+                      child: Text(
+                          'Penerima Donasi',
                           style: FontFamily().mediumteks),
                     ),
                     TeksFormField(hinText: "Tulis Penerima Donasi"),
@@ -65,7 +85,7 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "    Upload Proposal Donasi",
+                            "Upload Proposal Donasi",
                             style: FontFamily().mediumteks.copyWith(
                                 fontSize: 14, color: ColorStyle().primaryblue),
                           ),
@@ -142,7 +162,7 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                             builder: (_) => NetworkGiffDialog(
                                   image: Padding(
                                     padding: const EdgeInsets.only(top: 16),
-                                    child: Image.asset(ImageCollection.sepatu),
+                                    child: Image.asset("assets/sepatu.png"),
                                   ),
                                   title: Text('Kirim pengajuan Campaign?',
                                       textAlign: TextAlign.center,
@@ -158,6 +178,7 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                                   buttonOkColor: ColorStyle().primaryblue,
                                   buttonCancelColor: ColorStyle().disable,
                                   onOkButtonPressed: () {
+                                    _postData();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
