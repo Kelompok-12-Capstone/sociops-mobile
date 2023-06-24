@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:sociops/screen/fitur_organization/profile.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
@@ -19,12 +18,12 @@ class Baca extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Berita Terbaru',
           style: Styles.organizerTextStyle,
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Color(0XFF444CE7),
           ),
@@ -37,7 +36,7 @@ class Baca extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             FutureBuilder<NewsResponse>(
               builder: (ctx, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -45,7 +44,7 @@ class Baca extends StatelessWidget {
                     return Center(
                       child: Text(
                         '${snapshot.error} occurred',
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                     );
                   } else if (snapshot.hasData) {
@@ -55,7 +54,7 @@ class Baca extends StatelessWidget {
                     );
                     if (filteredData != null) {
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.only(bottom: 16),
                         child: GestureDetector(
                           onTap: () {
                             // Handle onTap action here
@@ -64,13 +63,13 @@ class Baca extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('Data not found.'),
                       );
                     }
                   }
                 }
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               },
@@ -89,6 +88,7 @@ class CategoryBox extends StatelessWidget {
   final Color color;
 
   const CategoryBox({
+    super.key,
     required this.text,
     required this.color,
   });
@@ -108,7 +108,7 @@ class CategoryBox extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: AppColors.arrowColor,
           ),
         ),
@@ -120,7 +120,7 @@ class CategoryBox extends StatelessWidget {
 class CustomFollowButton extends StatelessWidget {
   final Datum data;
 
-  CustomFollowButton({required this.data});
+  const CustomFollowButton({super.key, required this.data});
 
   String _formatCreatedAt(DateTime createdAt) {
     final now = DateTime.now();
@@ -154,7 +154,7 @@ class CustomFollowButton extends StatelessWidget {
     String formattedCreatedAt = _formatCreatedAt(this.data.createdAt);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +163,7 @@ class CustomFollowButton extends StatelessWidget {
               '$formattedTitle',
               style: Styles.result4,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               '$formattedAuthor',
               style: Styles.result5,
@@ -173,7 +173,7 @@ class CustomFollowButton extends StatelessWidget {
               '$formattedCreatedAt',
               style: Styles.result6,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
               width: 5,
             ),
@@ -181,12 +181,12 @@ class CustomFollowButton extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
                 );
               },
               child: Container(),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               width: 500,
               height: 200,
@@ -199,7 +199,7 @@ class CustomFollowButton extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               data.description.toString(),
               style: Styles.resultTextStyle,

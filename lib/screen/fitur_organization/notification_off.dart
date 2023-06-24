@@ -1,10 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:sociops/screen/fitur_home/home_khusus_screen.dart';
 import 'package:sociops/screen/fitur_organization/round_button.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
-import 'package:sociops/screen/home_screen.dart';
 import 'package:sociops/screen/explore_screen.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -29,7 +29,7 @@ class NotificationPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
+                            builder: (context) => const HomeKhusus()),
                       );
                     },
                   ),

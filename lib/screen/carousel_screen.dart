@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sociops/screen/home_screen.dart';
+// import 'package:sociops/screen/home_screen.dart';
 import 'package:sociops/screen/login_screen.dart';
 
 class CarouselScreen extends StatefulWidget {
@@ -180,12 +180,12 @@ class _CarouselScreenState extends State<CarouselScreen> {
             height: 60,
             child: TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const HomeScreen(),
+                //   ),
+                // );
               },
               child: Text(
                 'Lanjutkan tanpa akun',
