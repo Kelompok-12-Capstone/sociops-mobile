@@ -26,9 +26,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Sociops',
-        theme: ThemeData(),
-        debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+      title: 'Sociops',
+      theme: ThemeData(),
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+    );
   }
 }

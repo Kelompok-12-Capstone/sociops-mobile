@@ -88,19 +88,24 @@ class _DetailDonasiScreenState extends State<DetailDonasiScreen> {
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 20, bottom: 32),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedTag(teks: "Umum"),
-                        OutlineTag(
-                          teks: "Indonesi(Online)",
-                          icon: Icons.location_on_outlined,
-                        ),
-                        OutlineTag(
-                          teks: "1 aksi = Rp.10.000",
-                          icon: Icons.location_on_outlined,
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedTag(teks: "Umum"),
+                          SizedBox(width: 12),
+                          OutlineTag(
+                            teks: "Indonesi(Online)",
+                            icon: Icons.location_on_outlined,
+                          ),
+                          SizedBox(width: 12),
+                          OutlineTag(
+                            teks: "1 aksi = Rp.10.000",
+                            icon: Icons.location_on_outlined,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Container(

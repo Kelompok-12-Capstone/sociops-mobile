@@ -16,10 +16,13 @@ class PengisianDonasiScreen extends StatefulWidget {
 
 class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
   final ApiService apiService = ApiService();
-  final TextEditingController targetRecipientController = TextEditingController();
+  final TextEditingController targetRecipientController =
+      TextEditingController();
   final TextEditingController proposalController = TextEditingController();
-  final TextEditingController detailActionDonationController = TextEditingController();
-  final TextEditingController totalActionDonationController = TextEditingController();
+  final TextEditingController detailActionDonationController =
+      TextEditingController();
+  final TextEditingController totalActionDonationController =
+      TextEditingController();
 
   void _postData() {
     // ignore: unused_local_variable
@@ -31,7 +34,8 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
     // ignore: unused_local_variable
     final totalActionDonation = totalActionDonationController.text;
 
-    apiService.postData(targetRecipient, proposal, detailActionDonation, totalActionDonation as int );
+    apiService.postData(targetRecipient, proposal, detailActionDonation,
+        totalActionDonation as int);
   }
 
   bool _switchValue = false;
@@ -64,8 +68,7 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 20, bottom: 20),
-                      child: Text(
-                          'Penerima Donasi',
+                      child: Text('Penerima Donasi',
                           style: FontFamily().mediumteks),
                     ),
                     TeksFormField(hinText: "Tulis Penerima Donasi"),
@@ -84,10 +87,14 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Upload Proposal Donasi",
-                            style: FontFamily().mediumteks.copyWith(
-                                fontSize: 14, color: ColorStyle().primaryblue),
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Text(
+                              "Upload Proposal Donasi",
+                              style: FontFamily().mediumteks.copyWith(
+                                  fontSize: 14,
+                                  color: ColorStyle().primaryblue),
+                            ),
                           ),
                           IconButton(
                             onPressed: () {},

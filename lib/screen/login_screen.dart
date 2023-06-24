@@ -24,13 +24,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        leading: const BackButton(
-          color: Color(0XFF444CE7),
-        ),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0.0,
+      //   backgroundColor: Colors.white,
+      //   leading: const BackButton(
+      //     color: Color(0XFF444CE7),
+      //   ),
+      // ),
       body: Container(
         color: Colors.white,
         child: ListView(

@@ -1,6 +1,6 @@
 class ImageCollection {
   static const String sepatu = 'assets/sepatu.png';
-  static const String profile = 'assets/profile.png';
+  static const String profile = 'assets/profile.jpg';
   static const String ibuDANanak = 'assets/Anak Sakit.png';
   static const String alarm = 'assets/Alarm.png';
   static const String bell = 'assets/bell.png';
