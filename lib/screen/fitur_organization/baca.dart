@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:sociops/screen/fitur_organization/profile.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
 
-class Baca extends StatelessWidget {
-  const Baca({super.key});
+import '../../models/NewsResponse.dart';
+import '../../services/news_services_api.dart';
 
+class Baca extends StatelessWidget {
+  final Datum data;
+  final int selectedId;
+
+  const Baca({Key? key, required this.data, required this.selectedId})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,66 +20,64 @@ class Baca extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.white,
         title: Text(
-          'Berita terbaru',
-          style: GoogleFonts.inter(
-            fontWeight: FontWeight.w500,
-            fontSize: 24,
-            color: Colors.black,
-          ),
+          'Berita Terbaru',
+          style: Styles.organizerTextStyle,
         ),
-        leading: const BackButton(
-          color: Color(0XFF444CE7),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Color(0XFF444CE7),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                color: AppColors.primaryColor,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.bookmark_border,
-                color: AppColors.arrowColor,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          GestureDetector(
-            onTap: () {
-              // Logic for sort button
-            },
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                color: AppColors.primaryColor,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.share_outlined,
-                color: AppColors.arrowColor,
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-        ],
       ),
-      body: Container(
-        color: Colors.white,
-        child: const SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 16),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: CustomFollowButton(),
-              ),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 16),
+            FutureBuilder<NewsResponse>(
+              builder: (ctx, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        '${snapshot.error} occurred',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    );
+                  } else if (snapshot.hasData) {
+                    final data = snapshot.data!;
+                    final filteredData = data.data.firstWhere(
+                      (datum) => datum.id == selectedId,
+                    );
+                    if (filteredData != null) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: GestureDetector(
+                          onTap: () {
+                            // Handle onTap action here
+                          },
+                          child: CustomFollowButton(data: filteredData),
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text('Data not found.'),
+                      );
+                    }
+                  }
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+              future: NewsService().fetchNews(),
+              initialData: NewsResponse(data: [], message: '', status: false),
+            ),
+          ],
         ),
       ),
     );
@@ -85,7 +89,6 @@ class CategoryBox extends StatelessWidget {
   final Color color;
 
   const CategoryBox({
-    super.key,
     required this.text,
     required this.color,
   });
@@ -105,7 +108,7 @@ class CategoryBox extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.arrowColor,
           ),
         ),
@@ -115,69 +118,95 @@ class CategoryBox extends StatelessWidget {
 }
 
 class CustomFollowButton extends StatelessWidget {
-  const CustomFollowButton({super.key});
+  final Datum data;
+
+  CustomFollowButton({required this.data});
+
+  String _formatCreatedAt(DateTime createdAt) {
+    final now = DateTime.now();
+    final difference = now.difference(createdAt);
+
+    if (difference.inDays > 0) {
+      return '${difference.inDays} hari yang lalu';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours} jam yang lalu';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes} menit yang lalu';
+    } else {
+      return 'Baru saja';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Seru! Salurkan Donasi Alat Kesenian untuk Anak-anak Desa Wagiri',
-          style: Styles.result4,
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          'By Nailul Izah',
-          style: Styles.result5,
-        ),
-        const SizedBox(height: 8),
-        const Text(
-          '11 May 2023',
-          style: Styles.result6,
-        ),
-        const SizedBox(
-          height: 10,
-          width: 5,
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
-          },
-          child: Container(
-            width: 55,
-            height: 25,
-            decoration: BoxDecoration(
-              color: AppColors.Button,
-              borderRadius: BorderRadius.circular(10),
+    String formattedTitle = this
+        .data
+        .title
+        .toString()
+        .replaceFirst('Title.', '')
+        .replaceAll('_', ' ');
+    String formattedAuthor = this
+        .data
+        .author
+        .toString()
+        .replaceFirst('Author.', '')
+        .replaceAll('_', ' ');
+    String formattedCreatedAt = _formatCreatedAt(this.data.createdAt);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '$formattedTitle',
+              style: Styles.result4,
             ),
-            child: const Center(
-              child: Text('Donation', style: Styles.result7),
+            SizedBox(height: 8),
+            Text(
+              '$formattedAuthor',
+              style: Styles.result5,
             ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        Container(
-          width: 500,
-          height: 200,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(8),
-            image: const DecorationImage(
-              image: AssetImage('assets/hyundai.jpg'),
-              fit: BoxFit.cover,
+            const SizedBox(height: 8),
+            Text(
+              '$formattedCreatedAt',
+              style: Styles.result6,
             ),
-          ),
+            SizedBox(
+              height: 10,
+              width: 5,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
+              child: Container(),
+            ),
+            SizedBox(height: 16),
+            Container(
+              width: 500,
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  image: NetworkImage(data.photoUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              data.description.toString(),
+              style: Styles.resultTextStyle,
+            ),
+          ],
         ),
-        const SizedBox(height: 16),
-        const Text(
-          'Proin et euismod diam. Duis fermentum felis nisi, ut lobortis lectus mollis non. Integer pellentesque erat eu diam pharetra auctor id et nulla. Nam sodales arcu nec blandit fringilla. Ut vitae ligula vel lectus ultrices tempus ut id sem. Etiam egestas lacus scelerisque augue congue, sed rutrum sem lobortis. Pellentesque vel enim ante. Quisque hendrerit lobortis neque, ac tempor dui elementum vel. Duis vitae ante imperdiet, lacinia nulla sit amet, hendrerit erat. In ac lectus vulputate, pellentesque est et, interdum augue. Nam in sodales augue, non pellentesque orci. Nullam aliquet ante ut dolor molestie venenatis. Aliquam a erat quis nulla congue porttitor sit amet id nulla. Fusce pretium diam quam, vel consequat nibh feugiat id. Aenean laoreet auctor sollicitudin. Donec at sagittis nulla, sit amet lacinia eros.',
-          style: Styles.resultTextStyle,
-        ),
-      ],
+      ),
     );
   }
 }
