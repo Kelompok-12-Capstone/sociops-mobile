@@ -113,7 +113,7 @@ class _CustomFollowButtonState extends State<CustomFollowButton> {
                 topRight: Radius.circular(8),
               ),
               image: DecorationImage(
-                image: NetworkImage(
+                image: AssetImage(
                   'https://media.glassdoor.com/lst2x/b9/c5/c8/b3/hyundai-motor-india-engineering-r-and-d-centre.jpg',
                 ),
                 fit: BoxFit.cover,
