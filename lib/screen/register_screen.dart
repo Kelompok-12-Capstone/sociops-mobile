@@ -1,11 +1,9 @@
 // import 'package:dio/dio.dart' as dio; // Importing Dio with an alias
 // import 'package:get/get_connect/http/src/response/response.dart' as getConnect; // Importing GetConnect Response with an alias
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sociops/screen/login_screen.dart';
-
 import '../provider/button_register.dart';
 import '../provider/teksfield_register.dart';
 import '../provider/user/register_provider.dart';

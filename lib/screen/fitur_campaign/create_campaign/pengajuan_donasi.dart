@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
-import 'package:sociops/screen/fitur_campaign/componen/image_collection.dart';
 import 'package:sociops/screen/fitur_campaign/create_campaign/detail_donasi.dart';
+import 'package:sociops/screen/fitur_home/home_khusus_screen.dart';
 import 'package:sociops/style/font_style.dart';
 
 class PengajuanDonasiScreen extends StatefulWidget {
@@ -12,6 +12,7 @@ class PengajuanDonasiScreen extends StatefulWidget {
 }
 
 class _PengajuanDonasiScreenState extends State<PengajuanDonasiScreen> {
+  
   bool isObscureText = true;
   SizedBox tinggi = const SizedBox(height: 12);
   @override
@@ -39,7 +40,7 @@ class _PengajuanDonasiScreenState extends State<PengajuanDonasiScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      child: Image.asset(ImageCollection.pengajuan),
+                      child: Image.asset('assets/sukses.png'),
                     ),
                     Text(
                       'Terimakasih!',
@@ -66,12 +67,23 @@ class _PengajuanDonasiScreenState extends State<PengajuanDonasiScreen> {
                         }),
                     const SizedBox(height: 16),
                     ButtonSecondary(
-                        teks: "Kembali ke Beranda", onPressed: () {})
-                  ],
+                        teks: "Kembali ke Beranda", onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                (const HomeKhusus()
+                              ),
+                            ),
+                          );
+                        }
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ));
-  }
-}
+        );
+      }
+    }

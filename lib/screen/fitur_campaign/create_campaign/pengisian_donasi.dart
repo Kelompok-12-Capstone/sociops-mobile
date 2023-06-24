@@ -1,8 +1,11 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:giff_dialog/giff_dialog.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
 import 'package:sociops/screen/fitur_campaign/componen/teks_form_field.dart';
 import 'package:sociops/screen/fitur_campaign/create_campaign/pengajuan_donasi.dart';
+import 'package:sociops/screen/fitur_campaign/models/buatVolunteer_models.dart';
 import 'package:sociops/service/donasi_service.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
@@ -15,29 +18,38 @@ class PengisianDonasiScreen extends StatefulWidget {
 }
 
 class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
-  final ApiService apiService = ApiService();
-  final TextEditingController targetRecipientController = TextEditingController();
-  final TextEditingController proposalController = TextEditingController();
-  final TextEditingController detailActionDonationController = TextEditingController();
-  final TextEditingController totalActionDonationController = TextEditingController();
 
-  void _postData() {
-    // ignore: unused_local_variable
-    final targetRecipient = targetRecipientController.text;
-    // ignore: unused_local_variable
-    final proposal = proposalController.text;
-    // ignore: unused_local_variable
-    final detailActionDonation = detailActionDonationController.text;
-    // ignore: unused_local_variable
-    final totalActionDonation = totalActionDonationController.text;
-
-    apiService.postData(targetRecipient, proposal, detailActionDonation, totalActionDonation as int );
-  }
-
+  CampaignModel? campaignModel;
   bool _switchValue = false;
   String selectedCategory = '';
   bool isObscureText = true;
   SizedBox tinggi = const SizedBox(height: 12);
+  FilePickerResult? result;
+  String? _fileName;
+  PlatformFile? pickedfile;
+  File? fileToDisplay;
+
+  void pickFile() async {
+    try{
+      result = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+      if (result != null){
+        _fileName = result!.files.first.name;
+        pickedfile = result!.files.first;
+        fileToDisplay = File(pickedfile!.path.toString());
+
+        print('File name $_fileName');
+      }
+
+    }
+    catch(e){
+      print(e);
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +87,7 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                           style: FontFamily().mediumteks),
                     ),
                     Container(
-                      width: 396, // atur lebar kontainer sesuai kebutuhan
+                      width: 390, // atur lebar kontainer sesuai kebutuhan
                       height: 54, // atur tinggi kontainer sesuai kebutuhan
                       decoration: BoxDecoration(
                         border: Border.all(color: ColorStyle().primaryblue),
@@ -89,13 +101,24 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                             style: FontFamily().mediumteks.copyWith(
                                 fontSize: 14, color: ColorStyle().primaryblue),
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.cloud_upload_outlined,
-                              color: ColorStyle().primaryblue,
-                            ),
-                          ),
+                          Column(
+                            children: [
+                              IconButton(
+                                onPressed: () async{
+                                  pickFile();
+                                },
+                                icon: Icon(
+                                  Icons.cloud_upload_outlined,
+                                  color: ColorStyle().primaryblue,
+                                ),
+                              ),
+                            ],
+                          ), 
+                          if (pickedfile != null)
+                          SizedBox(
+                            height: 300, 
+                            width: 100,
+                            child: Image.file(fileToDisplay!),),
                         ],
                       ),
                     ),
@@ -177,8 +200,33 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                                           .copyWith(fontSize: 14)),
                                   buttonOkColor: ColorStyle().primaryblue,
                                   buttonCancelColor: ColorStyle().disable,
-                                  onOkButtonPressed: () {
-                                    _postData();
+                                  onOkButtonPressed: () async{
+                                    CampaignModel? result = await DonasiServices.createUser(
+                                      "[DATA TEST] Inovasi untuk Masa Depan: Mendukung Riset dan Teknologi",
+                                      12,
+                                      "[DATA TEST] Kami berkomitmen untuk mendukung riset dan teknologi sebagai sumber inovasi untuk masa depan. Kami memfasilitasi pengembangan penelitian, pembiayaan startup teknologi, dan kolaborasi antara ilmuwan, insinyur, dan komunitas teknologi untuk menciptakan solusi berkelanjutan.",
+                                      "[DATA TEST] Kisah kami dimulai ketika kami melihat potensi besar dalam riset dan teknologi untuk mengatasi masalah global. Kami merasa terpanggil untuk menyediakan platform dan sumber daya bagi ilmuwan, insinyur, dan komunitas teknologi untuk berkolaborasi, berinovasi, dan mewujudkan solusi yang berkelanjutan.",
+                                      "XXX",
+                                      "XXX",
+                                      "XXX",
+                                      "[DATA TEST] #InovasiMasaDepan",
+                                      "[DATA TEST] Riset dan teknologi inovatif",
+                                      "[DATA TEST] Silicon Valley, Amerika Serikat",
+                                      "2023-10-14T14:56:18.732Z",
+                                      "2023-12-14T14:56:18.732Z",
+                                      10000000,
+                                      50000,
+                                      "[DATA TEST] Setiap donasi akan digunakan untuk mendukung riset inovatif, pembiayaan startup teknologi, dan program kolaborasi di bidang riset dan teknologi.",
+                                      "FUNDRAISING",
+                                      "",
+                                      
+                                    );
+                                    if (result != null){
+                                      setState(() {
+                                        campaignModel = result;
+                                      });
+                                    }
+                                    // ignore: use_build_context_synchronously
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -189,7 +237,8 @@ class _PengisianDonasiScreenState extends State<PengisianDonasiScreen> {
                                   },
                                   onCancelButtonPressed: () =>
                                       Navigator.of(context).pop(),
-                                ));
+                          ),
+                        );
                       },
                     ),
                   ],

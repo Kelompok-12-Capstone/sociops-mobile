@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
-import 'package:sociops/screen/fitur_campaign/componen/image_collection.dart';
 import 'package:sociops/screen/fitur_campaign/create_volunteer/detail_volunteer.dart';
+import 'package:sociops/screen/fitur_home/home_khusus_screen.dart';
 import 'package:sociops/style/font_style.dart';
 
 class PengajuanVolunteerScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _PengajuanVolunteerScreenState extends State<PengajuanVolunteerScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      child: Image.asset(ImageCollection.pengajuan),
+                      child: Image.asset('assets/sukses.png'),
                     ),
                     Text(
                       'Terimakasih!',
@@ -67,12 +67,22 @@ class _PengajuanVolunteerScreenState extends State<PengajuanVolunteerScreen> {
                         }),
                     const SizedBox(height: 16),
                     ButtonSecondary(
-                        teks: "Kembali ke Beranda", onPressed: () {}),
-                  ],
-                ),
+                        teks: "Kembali ke Beranda", onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  (const HomeKhusus()),
+                            ),
+                          );
+                        }
+                  ),
+                ],
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      )
+    );
   }
 }

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sociops/screen/fitur_campaign/models/buatVolunteer_models.dart';
 
-abstract class DonasiServices {
+abstract class VolunteerServices {
   static Future<CampaignModel?> createUser(
     String title,
     int categoryId,
