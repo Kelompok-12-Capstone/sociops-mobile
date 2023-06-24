@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
-import 'package:sociops/screen/fitur_campaign/componen/image_collection.dart';
 import 'package:sociops/screen/fitur_campaign/create_volunteer/detail_volunteer.dart';
 import 'package:sociops/style/font_style.dart';
 
@@ -40,7 +39,7 @@ class _PengajuanVolunteerScreenState extends State<PengajuanVolunteerScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      child: Image.asset(ImageCollection.pengajuan),
+                      child: Image.asset('assets/pesawat.png'),
                     ),
                     Text(
                       'Terimakasih!',

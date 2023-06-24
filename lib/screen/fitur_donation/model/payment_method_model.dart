@@ -1,12 +1,12 @@
 class PaymentResponse {
-  final List<PaymentMethod> data;
-  final String message;
-  final bool status;
+  final List<PaymentMethod>? data;
+  final String? message;
+  final bool? status;
 
   PaymentResponse({
-    required this.data,
-    required this.message,
-    required this.status,
+    this.data,
+    this.message,
+    this.status,
   });
 
   factory PaymentResponse.fromJson(Map<String, dynamic> json) {
