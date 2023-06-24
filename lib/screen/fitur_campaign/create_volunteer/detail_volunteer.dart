@@ -57,8 +57,10 @@ class _DetailVolunteerScreenState extends State<DetailVolunteerScreen> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
-                          ImageCollection.sepatu,
+                          'assets/sepatu.png',
                           fit: BoxFit.cover,
+                          height: 224,
+                          width: 396,
                         ),
                       ),
                     ),

@@ -1,24 +1,40 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sociops/screen/bottom_screen.dart';
-import 'dart:core';
+import 'package:sociops/screen/fitur_donation/failed_payment_screen.dart';
+import 'package:sociops/screen/fitur_donation/model/transaction_model.dart';
+import 'package:sociops/screen/fitur_donation/success_payment_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
 
-import 'package:sociops/screen/fitur_donation/success_payment_screen.dart';
-
 // ignore: must_be_immutable
-class CodePaymentScreen extends StatelessWidget {
+class CodePaymentScreen extends StatefulWidget {
   final String selectedAmount;
   final String? selectedPaymentMethod;
+  final ActionsResponse? actions;
+  final Data? status;
+
+  const CodePaymentScreen({
+    Key? key,
+    required this.selectedAmount,
+    this.selectedPaymentMethod,
+    this.actions,
+    this.status,
+  }) : super(key: key);
+
+  @override
+  State<CodePaymentScreen> createState() => _CodePaymentScreenState();
+}
+
+class _CodePaymentScreenState extends State<CodePaymentScreen> {
   final int fee = 1000;
 
-  CodePaymentScreen(
-      {Key? key, required this.selectedAmount, this.selectedPaymentMethod})
-      : super(key: key);
-
   DateTime transactionDate = DateTime.now();
+
   DateTime paymentDeadline = DateTime.now()
       .add(const Duration(days: 1))
       .subtract(const Duration(seconds: 1));
@@ -54,6 +70,14 @@ class CodePaymentScreen extends StatelessWidget {
     }
   }
 
+  String generatedCode = '';
+
+  @override
+  void initState() {
+    super.initState();
+    generatedCode = generateRandomCode();
+  }
+
   String generateRandomCode() {
     var rng = Random();
     String code = '';
@@ -62,6 +86,10 @@ class CodePaymentScreen extends StatelessWidget {
     }
     return code;
   }
+
+  bool isButtonPressed = false;
+
+  ActionsResponse? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +125,7 @@ class CodePaymentScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Complete the payment of Rp${NumberFormat('#,##0').format(int.parse(selectedAmount) + fee)}',
+                  'Complete the payment of Rp${NumberFormat('#,##0').format(int.parse(widget.selectedAmount) + fee)}',
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
@@ -127,7 +155,7 @@ class CodePaymentScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: 16),
                       Text(
-                        '$selectedPaymentMethod',
+                        '${widget.selectedPaymentMethod}',
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -143,7 +171,7 @@ class CodePaymentScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        generateRandomCode(),
+                        generatedCode,
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
@@ -155,8 +183,8 @@ class CodePaymentScreen extends StatelessWidget {
                         height: 48,
                         child: TextButton.icon(
                           onPressed: () {
-                            const textToCopy = 'D3-12RBHSJ';
-                            copyToClipboard(textToCopy);
+                            Clipboard.setData(
+                                ClipboardData(text: generatedCode));
                           },
                           icon: const Icon(
                             Icons.copy_outlined,
@@ -215,16 +243,62 @@ class CodePaymentScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SuccessPaymentScreen(),
-                        ),
-                      );
+                    onPressed: () async {
+                      String? url;
+                      if (widget.actions?.desktopWebCheckoutUrl != null) {
+                        url = widget.actions?.desktopWebCheckoutUrl;
+                      } else if (widget.actions?.mobileWebCheckoutUrl != null) {
+                        url = widget.actions?.mobileWebCheckoutUrl;
+                      } else if (widget.actions?.mobileDeeplinkCheckoutUrl !=
+                          null) {
+                        url = widget.actions?.mobileDeeplinkCheckoutUrl;
+                      }
+                      if (url != null) {
+                        try {
+                          // ignore: deprecated_member_use
+                          bool launched = await launch(url);
+                          if (launched) {
+                            // Pembayaran berhasil
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SuccessPaymentScreen(),
+                              ),
+                            );
+                          } else {
+                            // Pembayaran gagal
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FailedPaymentScreen(),
+                              ),
+                            );
+                          }
+                        } catch (error) {
+                          print('Error launching URL: $error');
+                          // Pembayaran gagal
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const FailedPaymentScreen(),
+                            ),
+                          );
+                        }
+                      } else {
+                        print('URL is not available');
+                        // Pembayaran gagal
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FailedPaymentScreen(),
+                          ),
+                        );
+                      }
                     },
                     child: Text(
-                      'Pergi ke midtrans',
+                      'Pergi ke xendit',
                       style: GoogleFonts.inter(
                         color: Colors.white,
                         fontSize: 18,

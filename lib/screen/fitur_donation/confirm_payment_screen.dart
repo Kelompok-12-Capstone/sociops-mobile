@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sociops/screen/fitur_donation/code_payment_screen.dart';
+import 'package:sociops/screen/fitur_donation/model/payment_method_model.dart';
+import 'package:sociops/screen/fitur_donation/model/transaction_model.dart';
+import 'package:sociops/screen/fitur_donation/service/payment_method_service.dart';
+import 'package:sociops/screen/fitur_donation/service/transaction_service.dart';
 
 // ignore: must_be_immutable
 class ConfirmPaymentScreen extends StatefulWidget {
@@ -15,9 +19,48 @@ class ConfirmPaymentScreen extends StatefulWidget {
 
 class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
   final int fee = 1000;
-
   String? selectedPaymentMethod;
   bool isButtonDisabled = true;
+
+  List<PaymentMethod> paymentMethods = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getPaymentMethods();
+  }
+
+  TransactionResponse? transactionResponse;
+
+  // ignore: unused_element
+  Future<TransactionResponse?> _createTransaction(
+    String amount,
+    int paymentID,
+  ) async {
+    try {
+      final data = await TransactionService.createTransaction(
+        amount: int.parse(amount),
+        paymentID: paymentID,
+      );
+      return data;
+    } catch (error) {
+      throw Exception('Failed to create transaction $error');
+    }
+  }
+
+  void getPaymentMethods() {
+    ApiPaymentMethodService.fetchPaymentMethods().then((response) {
+      if (response.statusCode == 200) {
+        setState(() {
+          final List<dynamic> data = response.data['data'];
+          paymentMethods =
+              data.map((json) => PaymentMethod.fromJson(json)).toList();
+        });
+      } else {
+        throw Exception('Failed to fetch payment methods');
+      }
+    }).catchError((error) {});
+  }
 
   void checkButtonStatus() {
     setState(() {
@@ -131,20 +174,39 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                             borderSide: BorderSide.none,
                           ),
                         ),
-                        items: <String>[
-                          'BNI Virtual Account',
-                          'BRI Virtual Account',
-                          'BCA Virtual Account',
-                          'Gopay'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                        dropdownColor: Colors.white,
+                        value: selectedPaymentMethod,
+                        items: paymentMethods.map(
+                          (paymentMethod) {
+                            return DropdownMenuItem<String>(
+                              value: paymentMethod.id.toString(),
+                              child: Row(
+                                children: [
+                                  Image.network(
+                                    paymentMethod.image,
+                                    height: 40,
+                                    width: 40,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    paymentMethod.name,
+                                    style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ).toList(),
                         onChanged: (String? newValue) {
-                          selectedPaymentMethod = newValue;
-                          checkButtonStatus();
+                          setState(
+                            () {
+                              selectedPaymentMethod = newValue;
+                              checkButtonStatus();
+                            },
+                          );
                         },
                       ),
                     ),
@@ -250,13 +312,24 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
               ),
               onPressed: isButtonDisabled
                   ? null
-                  : () {
+                  : () async {
+                      final data = await TransactionService.createTransaction(
+                        amount: int.parse(widget.selectedAmount),
+                        paymentID: int.parse(selectedPaymentMethod!),
+                      );
+                      // print(data?.data?.logs?.actions?.desktopWebCheckoutUrl);
+                      // print(data?.data?.logs?.actions?.mobileWebCheckoutUrl);
+                      // print(
+                      //     data?.data?.logs?.actions?.mobileDeeplinkCheckoutUrl);
+                      // ignore: use_build_context_synchronously
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => CodePaymentScreen(
                             selectedAmount: widget.selectedAmount,
                             selectedPaymentMethod: selectedPaymentMethod!,
+                            actions: data?.data?.logs?.actions,
+                            status: data?.data,
                           ),
                         ),
                       );
