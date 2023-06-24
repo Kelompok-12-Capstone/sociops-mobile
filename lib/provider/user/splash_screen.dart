@@ -1,13 +1,14 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:sociops/provider/user/spalash_provider.dart';
+import 'package:sociops/provider/user/splash_model_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+  @override
   _SplashScreen createState() => _SplashScreen();
 }
 
 class _SplashScreen extends State<SplashScreen> {
+  @override
   void initState() {
     super.initState();
     SplashViewModel().checkUserLogin(context);

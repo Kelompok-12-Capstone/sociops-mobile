@@ -80,8 +80,8 @@ class _HomeKhususState extends State<HomeKhusus> {
   /////
   Icon _getPlayPauseIcon(int index) {
     return _controllers[index]!.value.isPlaying == true
-        ? Icon(Icons.pause)
-        : Icon(Icons.play_arrow);
+        ? const Icon(Icons.pause)
+        : const Icon(Icons.play_arrow);
   }
 
 //////
@@ -93,7 +93,7 @@ class _HomeKhususState extends State<HomeKhusus> {
         future: campaignService.getCampaignData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
@@ -103,7 +103,7 @@ class _HomeKhususState extends State<HomeKhusus> {
           } else {
             final news = snapshot.data!;
             if (news.data.isEmpty) {
-              return Center(
+              return const Center(
                 child: Text('No campaign data available.'),
               );
             } else {
@@ -702,7 +702,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              DetailDonateScreen()),
+                                                              const DetailDonateScreen()),
                                                     );
                                                   },
                                                   style: ButtonStyle(
@@ -1346,7 +1346,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                           ],
                                         ),
                                         const SizedBox(height: 12),
-                                        BeritaHomeWidget(),
+                                        const BeritaHomeWidget(),
                                         const SizedBox(height: 16),
                                         const Divider(),
                                         const SizedBox(height: 12),
@@ -1401,7 +1401,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             right: 8.0),
                                                     child: Stack(
                                                       children: [
-                                                        Container(
+                                                        SizedBox(
                                                           height: 240,
                                                           width: 184,
                                                           child: AspectRatio(
@@ -1793,7 +1793,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                               MaterialPageRoute(
                                                                   builder:
                                                                       (context) =>
-                                                                          HyundaiProfileScreen()),
+                                                                          const HyundaiProfileScreen()),
                                                             );
                                                           },
                                                           style: ButtonStyle(

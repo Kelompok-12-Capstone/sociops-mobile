@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sociops/models/NewsResponse.dart';
-import 'package:sociops/screen/fitur_organization/baca.dart';
-import 'package:sociops/services/news_services_api.dart';
+import 'package:sociops/model/berita/detail_berita.dart';
+import 'package:sociops/model/berita/model_berita.dart';
+import 'package:sociops/service/news_services_api.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class Berita extends StatefulWidget {
-  const Berita();
+  const Berita({super.key});
 
   @override
   _BeritaState createState() => _BeritaState();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sociops/provider/user/login_provider.dart';
 import 'package:sociops/provider/user/register_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:sociops/screen/bottom_screen.dart';
 import 'package:sociops/screen/splash_screen.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'Sociops',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const BottomNavbarScreen(),
     );
   }
 }

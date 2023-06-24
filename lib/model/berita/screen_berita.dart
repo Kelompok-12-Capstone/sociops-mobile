@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sociops/screen/fitur_organization/baca.dart';
+import 'package:sociops/model/berita/detail_berita.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -8,7 +8,7 @@ import 'berita_service.dart';
 import 'model_berita.dart';
 
 class Berita extends StatefulWidget {
-  const Berita();
+  const Berita({super.key});
 
   @override
   _BeritaState createState() => _BeritaState();
@@ -26,7 +26,8 @@ class _BeritaState extends State<Berita> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => Baca()),
+        builder: (context) => Baca(data: data, selectedId: data.id),
+      ),
     );
   }
 
@@ -53,7 +54,7 @@ class _BeritaState extends State<Berita> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Berita Terbaru',
           style: Styles.organizerTextStyle,
         ),
@@ -100,7 +101,7 @@ class _BeritaState extends State<Berita> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 FutureBuilder(
                   builder: (ctx, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -108,7 +109,7 @@ class _BeritaState extends State<Berita> {
                         return Center(
                           child: Text(
                             '${snapshot.error} occurred',
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         );
                       } else if (snapshot.hasData) {
@@ -118,7 +119,7 @@ class _BeritaState extends State<Berita> {
                                 ? searchResults
                                 : data.data;
 
-                        return Container(
+                        return SizedBox(
                           height: 500,
                           child: ListView.builder(
                             itemCount: displayedData.length,
@@ -127,7 +128,7 @@ class _BeritaState extends State<Berita> {
                               final datum = displayedData[index];
                               if (index == displayedData.length - 1) {
                                 return Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       bottom: 32, left: 16, right: 16),
                                   child: GestureDetector(
                                     onTap: () {},
@@ -139,7 +140,7 @@ class _BeritaState extends State<Berita> {
                                 );
                               } else {
                                 return Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       bottom: 16, left: 5, right: 5),
                                   child: GestureDetector(
                                     onTap: () {},
@@ -155,7 +156,7 @@ class _BeritaState extends State<Berita> {
                         );
                       }
                     }
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   },
@@ -175,6 +176,7 @@ class CategoryBox extends StatefulWidget {
   final Color color;
 
   const CategoryBox({
+    super.key,
     required this.text,
     required this.color,
   });
@@ -221,7 +223,7 @@ class CustomFollowButton extends StatelessWidget {
   final Datum data;
   final VoidCallback onPressed;
 
-  CustomFollowButton({required this.data, required this.onPressed});
+  CustomFollowButton({super.key, required this.data, required this.onPressed});
   String _formatCreatedAt(DateTime createdAt) {
     final now = DateTime.now();
     final difference = now.difference(createdAt);
@@ -259,13 +261,13 @@ class CustomFollowButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 8, right: 16),
+              padding: const EdgeInsets.only(top: 8, bottom: 8, right: 16),
               child: SizedBox(
                 width: 100,
                 height: 100,
                 child: Card(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8),
                       bottomLeft: Radius.circular(8),
@@ -287,7 +289,7 @@ class CustomFollowButton extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Container(
               width: 256,
               height: 140,
@@ -304,7 +306,7 @@ class CustomFollowButton extends StatelessWidget {
                       textAlign: TextAlign.start,
                       style: Styles.result8,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       formattedTitle,
                       style: Styles.result9,
@@ -312,7 +314,7 @@ class CustomFollowButton extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       data.description.toString(),
                       style: Styles.result10,
@@ -320,9 +322,9 @@ class CustomFollowButton extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: GestureDetector(
                         onTap: onPressed,
                         child: Container(
@@ -331,7 +333,7 @@ class CustomFollowButton extends StatelessWidget {
                             color: AppColors.Button,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(width: 8),
