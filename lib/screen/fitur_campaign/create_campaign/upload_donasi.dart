@@ -13,18 +13,6 @@ class UploadDonasiScreen extends StatefulWidget {
 }
 
 class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
-  // BuatVolunteerService buatVolunteerService = BuatVolunteerService();
-  // TextEditingController titleController = TextEditingController();
-  // TextEditingController categoryController = TextEditingController();
-  // TextEditingController aboutController = TextEditingController();
-  // TextEditingController storyController = TextEditingController();
-  // TextEditingController proposalController = TextEditingController();
-  // TextEditingController imageController = TextEditingController();
-  // TextEditingController videoController = TextEditingController();
-  // TextEditingController hastagController = TextEditingController();
-
-
-
   String selectedCategory = '';
   bool isObscureText = true;
   SizedBox tinggi = const SizedBox(height: 12);
@@ -73,8 +61,8 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Judul', style: FontFamily().mediumteks),
                   ),
-                  TextField(
-                    decoration: const InputDecoration(
+                  const TextField(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(), 
                       hintText: "Tulis",
                     ),
@@ -83,8 +71,8 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Hastag', style: FontFamily().mediumteks),
                   ),
-                  TextField(
-                    decoration: const InputDecoration(
+                  const TextField(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(), 
                       hintText: "Tambahkan tag dengan diawali #",
                     ),
@@ -159,9 +147,9 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
                           border: Border.all(color: ColorStyle().primaryblue)),
-                      child: TextField(
+                      child: const TextField(
                         textCapitalization: TextCapitalization.sentences,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             border: InputBorder.none,
 
                             // filled: true,
@@ -175,8 +163,8 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Cerita', style: FontFamily().mediumteks),
                   ),
-                    TextField(
-                    decoration: const InputDecoration(
+                    const TextField(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(), 
                       hintText: "Cerita dibuatnya Campaign",
                     ),),
@@ -197,20 +185,20 @@ class _UploadDonasiScreenState extends State<UploadDonasiScreen> {
                     'Selanjutnya'
                     ),
                     onPressed: () async {
-                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => (const PengajuanDonasiScreen()),
                         ),
                       );
-                   
-                    }),
-              ],
-            ),
-        ),]
-              ),   
+                    }
+                  ),
+                ],
               ),
-        );
+            ),
+          ]
+        ),   
+      ),
+    );
   }
 }

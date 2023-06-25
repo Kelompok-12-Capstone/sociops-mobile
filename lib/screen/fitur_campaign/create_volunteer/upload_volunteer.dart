@@ -5,8 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sociops/screen/fitur_campaign/componen/button_style.dart';
 import 'package:sociops/screen/fitur_campaign/create_volunteer/pengajuan_volunteer.dart';
 import 'package:sociops/screen/fitur_campaign/models/buatVolunteer_models.dart';
-import 'package:sociops/service/buatvolunteer_service.dart';
-import 'package:sociops/service/service_category.dart';
+import 'package:sociops/screen/fitur_home/volunteer_screen.dart';
+import 'package:sociops/service/volunteer_service.dart';
 import 'package:sociops/style/color_style.dart';
 import 'package:sociops/style/font_style.dart';
 
@@ -18,27 +18,6 @@ class UploadVolunteerScreen extends StatefulWidget {
 }
 
 class _UploadVolunteerScreenState extends State<UploadVolunteerScreen> {
-  BuatVolunteerService buatVolunteerService = BuatVolunteerService();
-  TextEditingController titleController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController aboutController = TextEditingController();
-  TextEditingController storyController = TextEditingController();
-  TextEditingController proposalController = TextEditingController();
-  TextEditingController hastagController = TextEditingController();
-
-  List<CategoryModels> listCategoryModels = [];
-  CategoryService categoryService = CategoryService();
-
-  getData() async {
-  listCategoryModels = await categoryService.getCategoryService();
-  setState(() {});
-}
-
-  @override
-  void initState() {
-    getData();
-    super.initState();
-  }
 
   // List<CategoryModels> listCategoryModels = [];
   // CategoryService categoryService = CategoryService();
@@ -52,6 +31,7 @@ class _UploadVolunteerScreenState extends State<UploadVolunteerScreen> {
   //   getData();
   //   super.initState();
   // }
+  CampaignModel? campaignModel;
   String selectedCategory = '';
   bool isObscureText = true;
   SizedBox tinggi = const SizedBox(height: 12);
@@ -166,14 +146,13 @@ class _UploadVolunteerScreenState extends State<UploadVolunteerScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Judul', style: FontFamily().mediumteks),
                   ),
-                  Align(
+                  const Align(
                     alignment: Alignment.center,
                     child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(), 
                       hintText: "Tulis",
                     ),
-                    controller: titleController,
                     ),
                   ),
                   Padding(
@@ -374,14 +353,31 @@ class _UploadVolunteerScreenState extends State<UploadVolunteerScreen> {
                                   buttonOkColor: ColorStyle().primaryblue,
                                   buttonCancelColor: ColorStyle().disable,
                                   onOkButtonPressed: () async {
-                                    bool response = await buatVolunteerService.postData(
-                                      title: titleController.text,
-                                      story: storyController.text,
-                                      about: aboutController.text,
-                                      hastag: hastagController.text,
+                                    CampaignModel? result = await VolunteerServices.createUser(
+                                      "[DATA TEST] Inovasi untuk Masa Depan: Mendukung Riset dan Teknologi",
+                                      12,
+                                      "[DATA TEST] Kami berkomitmen untuk mendukung riset dan teknologi sebagai sumber inovasi untuk masa depan. Kami memfasilitasi pengembangan penelitian, pembiayaan startup teknologi, dan kolaborasi antara ilmuwan, insinyur, dan komunitas teknologi untuk menciptakan solusi berkelanjutan.",
+                                      "[DATA TEST] Kisah kami dimulai ketika kami melihat potensi besar dalam riset dan teknologi untuk mengatasi masalah global. Kami merasa terpanggil untuk menyediakan platform dan sumber daya bagi ilmuwan, insinyur, dan komunitas teknologi untuk berkolaborasi, berinovasi, dan mewujudkan solusi yang berkelanjutan.",
+                                      "XXX",
+                                      "XXX",
+                                      "XXX",
+                                      "[DATA TEST] #InovasiMasaDepan",
+                                      "[DATA TEST] Riset dan teknologi inovatif",
+                                      "[DATA TEST] Silicon Valley, Amerika Serikat",
+                                      "2023-10-14T14:56:18.732Z",
+                                      "2023-12-14T14:56:18.732Z",
+                                      10000000,
+                                      50000,
+                                      "[DATA TEST] Setiap donasi akan digunakan untuk mendukung riset inovatif, pembiayaan startup teknologi, dan program kolaborasi di bidang riset dan teknologi.",
+                                      "FUNDRAISING",
+                                      "",
+                                      
                                     );
-                                    if (response) {
-                                    // ignore: use_build_context_synchronously
+                                    if (result != null){
+                                      setState(() {
+                                        campaignModel = result;
+                                      });
+                                    }
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -389,9 +385,6 @@ class _UploadVolunteerScreenState extends State<UploadVolunteerScreen> {
                                             (const PengajuanVolunteerScreen()),
                                       ),
                                     );
-                                    } else {
-                                        print('Created Form Gagal!');
-                                      }
                                   },
                                   onCancelButtonPressed: () =>
                                       Navigator.of(context).pop(),

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:sociops/provider/user/login_provider.dart';
 import 'package:sociops/provider/user/register_provider.dart';
