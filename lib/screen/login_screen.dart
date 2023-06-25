@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sociops/screen/register_screen.dart';
 import '../provider/button_register.dart';
-import '../provider/teksfield_register.dart';
+import '../provider/text_field_register.dart';
 import '../provider/user/login_provider.dart';
 import 'package:provider/provider.dart';
 
