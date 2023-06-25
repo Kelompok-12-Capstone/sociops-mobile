@@ -657,35 +657,35 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                         SizedBox(
                           width: 372,
                           height: 44,
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DetailVolunteer(),
-                                ),
-                              );
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                const Color(0xFFFEF3F2),
-                              ),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(32.0),
-                                ),
-                              ),
-                            ),
-                            child: Text(
-                              'Daftar',
-                              style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                                color: const Color(0xFFD92D20),
-                              ),
-                            ),
-                          ),
+                          // child: TextButton(
+                          //   onPressed: () {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) => const DetailVolunteer(),
+                          //       ),
+                          //     );
+                          //   },
+                          //   style: ButtonStyle(
+                          //     backgroundColor: MaterialStateProperty.all<Color>(
+                          //       const Color(0xFFFEF3F2),
+                          //     ),
+                          //     shape: MaterialStateProperty.all<
+                          //         RoundedRectangleBorder>(
+                          //       RoundedRectangleBorder(
+                          //         borderRadius: BorderRadius.circular(32.0),
+                          //       ),
+                          //     ),
+                          //   ),
+                          //   child: Text(
+                          //     'Daftar',
+                          //     style: GoogleFonts.inter(
+                          //       fontWeight: FontWeight.w600,
+                          //       fontSize: 14,
+                          //       color: const Color(0xFFD92D20),
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                       ],
                     ),

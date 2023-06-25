@@ -244,22 +244,32 @@ class _VolunteerScreenState extends State<VolunteerScreen> {
                             alignment: Alignment.topLeft,
                             child: Column(
                               children: [
-                                Text(
-                                  datum.title,
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  margin: const EdgeInsets.only(right: 140),
+                                  child: Text(
+                                    datum.title,
+                                    style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
                                   ),
                                 ),
                                 const SizedBox(height: 12),
-                                ReadMoreText(
-                                  datum.description,
-                                  trimLength: 100,
-                                  trimCollapsedText: 'readmore',
-                                  trimExpandedText: 'less',
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                              
+                                  child: ReadMoreText(
+                                    datum.description,
+                                    trimLength: 100,
+                                    trimCollapsedText: 'readmore',
+                                    trimExpandedText: 'less',
+                                    style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -303,7 +313,22 @@ class _VolunteerScreenState extends State<VolunteerScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const DetailVolunteer(),
+                                        DetailVolunteerFixScreen(
+                                      datum: volntr,
+                                      categoryName: datum.category.name,
+                                      description: datum.description,
+                                      image: datum.image,
+                                      location: datum.location,
+                                      organizerName: datum.organizer.name,
+                                      organizerPhotoUrl:
+                                          datum.organizer.photoUrl,
+                                      title: datum.title,
+                                      totalActiondonation:
+                                          datum.totalActionDonation.toString(),
+                                      totalAmountCollection:
+                                          datum.targetDonation.toString(),
+                                      video: datum.video,
+                                    ),
                                   ),
                                 );
                               },

@@ -205,6 +205,7 @@ class _DonationScreenState extends State<DonationScreen> {
                             ],
                           ),
                           const SizedBox(height: 12),
+                          ///////////// detail bagaimana galang dana //////////////////
                           SizedBox(
                             width: 372,
                             height: 30,
