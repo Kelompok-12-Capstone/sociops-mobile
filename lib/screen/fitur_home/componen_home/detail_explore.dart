@@ -4,7 +4,6 @@ import 'package:readmore/readmore.dart';
 
 import '../../../model/model_campaign.dart';
 
-
 class DetailEksplore extends StatefulWidget {
   final String? totalAmountCollection;
   final String? title;
@@ -128,12 +127,12 @@ class _DetailEksploreState extends State<DetailEksplore> {
                 ),
                 const SizedBox(height: 20),
                 SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
-                        width: 70,
+                        width: 100,
                         height: 30,
                         child: OutlinedButton(
                           style: ButtonStyle(
@@ -158,6 +157,7 @@ class _DetailEksploreState extends State<DetailEksplore> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       SizedBox(
                         width: 155,
                         height: 30,
@@ -190,6 +190,7 @@ class _DetailEksploreState extends State<DetailEksplore> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       SizedBox(
                         width: 130,
                         height: 30,
@@ -239,7 +240,7 @@ class _DetailEksploreState extends State<DetailEksplore> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(12),
                             child: CircleAvatar(
-                              radius: 50,
+                              radius: 30,
                               backgroundImage:
                                   NetworkImage(widget.organizerPhotoUrl!),
                             ),
@@ -322,25 +323,27 @@ class _DetailEksploreState extends State<DetailEksplore> {
                             Container(
                               alignment: Alignment.center,
                               padding: const EdgeInsets.all(12),
-                              child: Icon(Icons.alarm),
-                              // child: Image.asset(
-                              //   'assets/logo_notif.png',
-                              //   width: 56,
-                              //   height: 56,
+                              // child: const Icon(Icons.alarm,
+                              // size: 30,
                               // ),
+                              child: Image.asset(
+                                'assets/logo_notif.png',
+                                width: 56,
+                                height: 56,
+                              ),
                             ),
-                             Flexible(
-              child: Container(
-                // alignment: Alignment.center,
-                child: Text(
-                  'Nyalakan notifikasi Anda untuk mendapatkan informasi terbaru dari tantangan ini.',
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: const Color(0xFF444CE7),
-                  ),
-                  textAlign: TextAlign.justify,
-                ),
+                            Flexible(
+                              child: Container(
+                                // alignment: Alignment.center,
+                                child: Text(
+                                  'Nyalakan notifikasi Anda untuk mendapatkan informasi terbaru dari tantangan ini.',
+                                  style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: const Color(0xFF444CE7),
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
                               ),
                             ),
                           ],

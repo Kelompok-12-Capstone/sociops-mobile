@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sociops/screen/fitur_donation/select_payment_screen.dart';
-import 'package:sociops/style/font_style.dart';
+import 'package:sociops/screen/fitur_volunteer/ambil_aksi_screen.dart';
 
-import '../../model/model_fundaraising.dart';
 import '../../model/model_volunteer.dart';
 
 class DetailVolunteerFixScreen extends StatefulWidget {
@@ -46,7 +45,7 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
         elevation: 0.0,
         backgroundColor: Colors.white,
         title: Text(
-          'Detail galang dana',
+          'Detail volunteer',
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: 24,
@@ -95,40 +94,43 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                 Image.network(widget.image!),
                 const SizedBox(height: 8),
                 Container(
-                  alignment: Alignment.centerLeft,
                   margin: const EdgeInsets.only(right: 140),
                   child: Text(
                     widget.title!,
                     style: GoogleFonts.inter(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                    textAlign: TextAlign.left,
+                    // overflow: TextOverflow.ellipsis,
+                    // maxLines: 1,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   margin: const EdgeInsets.only(right: 16),
-                  child: Text(
+                  child: ReadMoreText(
                     widget.description!,
+                    trimLength: 150,
+                    trimCollapsedText: ' readmore',
+                    trimExpandedText: ' less',
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    // overflow: TextOverflow.ellipsis,
+                    // maxLines: 2,
                     textAlign: TextAlign.left,
                   ),
                 ),
                 const SizedBox(height: 20),
                 SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
-                        width: 70,
+                        width: 100,
                         height: 30,
                         child: OutlinedButton(
                           style: ButtonStyle(
@@ -153,38 +155,45 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       SizedBox(
                         width: 155,
                         height: 30,
-                        child: TextButton.icon(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.transparent,
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton.icon(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent,
+                              ),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(64.0),
                                   side: const BorderSide(
                                     color: Color(0xFF444CE7),
-                                  )),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.location_on_outlined,
-                            color: Color(0xFF444CE7),
-                          ),
-                          label: Text(
-                            widget.location!,
-                            style: GoogleFonts.inter(
-                              color: const Color(0xFF444CE7),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.location_on_outlined,
+                              color: Color(0xFF444CE7),
+                              size: 17,
+                            ),
+                            label: Text(
+                              widget.location!,
+                              style: GoogleFonts.inter(
+                                color: const Color(0xFF444CE7),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       SizedBox(
                         width: 130,
                         height: 30,
@@ -234,34 +243,31 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(12),
                             child: CircleAvatar(
-                              radius: 50,
+                              radius: 30,
                               backgroundImage:
                                   NetworkImage(widget.organizerPhotoUrl!),
                             ),
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Organizer',
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                  ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Organizer',
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12,
                                 ),
-                                Text(
-                                  widget.organizerName!,
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                    color: const Color(0xFF444CE7),
-                                  ),
+                              ),
+                              Text(
+                                widget.organizerName!,
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                  color: const Color(0xFF444CE7),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -406,6 +412,83 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                 ),
                 const SizedBox(height: 10),
                 const Divider(),
+                Container(
+                  height: 30,
+                  alignment: Alignment.topLeft,
+                  decoration: const BoxDecoration(),
+                  child: Text(
+                    'Tindakan yang harus di ambil',
+                    style: GoogleFonts.inter(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 187, 233, 255)),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ListTile(
+                      horizontalTitleGap: 10,
+                      minVerticalPadding: 10,
+                      leading: Image.asset(
+                        'assets/camera.png',
+                      ),
+                      title: Text(
+                        'Aksi 1',
+                        style: GoogleFonts.inter(
+                            fontSize: 16, color: const Color(0XFF444CE7)),
+                      ),
+                      subtitle: Text(
+                        'Upload foto kamu saat menggunakan sabuk pengaman di media sosial',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.inter(
+                            fontSize: 16, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 187, 233, 255)),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ListTile(
+                      horizontalTitleGap: 10,
+                      minVerticalPadding: 10,
+                      leading: Image.asset(
+                        'assets/thumb-up.png',
+                      ),
+                      title: Text(
+                        'Aksi 2',
+                        style: GoogleFonts.inter(
+                            fontSize: 16, color: const Color(0XFF444CE7)),
+                      ),
+                      subtitle: Text(
+                        'Upload foto kamu saat menggunakan sabuk pengaman di media sosial',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.inter(
+                            fontSize: 16, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -433,12 +516,12 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SelectPaymentScreen(),
+                    builder: (context) => const AmbilAksiScreen(),
                   ),
                 );
               },
               child: Text(
-                'Donasi sekarang',
+                'Daftar',
                 style: GoogleFonts.inter(
                   color: Colors.white,
                   fontSize: 18,

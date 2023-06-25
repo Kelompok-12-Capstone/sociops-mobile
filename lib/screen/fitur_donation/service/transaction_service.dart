@@ -6,7 +6,7 @@ class TransactionService {
   static const String apiUrl =
       'https://sociops-backend-production.up.railway.app/transactions';
   static const String accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJuYW1lIjoiQnVkaSIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTY4NzcxNDQwNH0.uaVjlTQE3P_DzJZ8r4y5PllJ-lRVauHqtIv0VPspDsE';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJuYW1lIjoiQnVkaSIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTY4Nzc1ODY2N30.G1TMYSeIYkQwf2cJ5MPktJWEGqtW6goWgg8OTv9DW_g';
 
   static final Dio _dio = Dio();
 

@@ -129,12 +129,12 @@ class _DetailFundaraisingState extends State<DetailFundaraising> {
                 ),
                 const SizedBox(height: 20),
                 SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
-                        width: 70,
+                        width: 100,
                         height: 30,
                         child: OutlinedButton(
                           style: ButtonStyle(
@@ -159,6 +159,7 @@ class _DetailFundaraisingState extends State<DetailFundaraising> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       SizedBox(
                         width: 155,
                         height: 30,
@@ -180,6 +181,7 @@ class _DetailFundaraisingState extends State<DetailFundaraising> {
                           icon: const Icon(
                             Icons.location_on_outlined,
                             color: Color(0xFF444CE7),
+                            size: 15,
                           ),
                           label: Text(
                             widget.location!,
@@ -191,6 +193,7 @@ class _DetailFundaraisingState extends State<DetailFundaraising> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       SizedBox(
                         width: 130,
                         height: 30,
@@ -240,7 +243,7 @@ class _DetailFundaraisingState extends State<DetailFundaraising> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(12),
                             child: CircleAvatar(
-                              radius: 50,
+                              radius: 30,
                               backgroundImage:
                                   NetworkImage(widget.organizerPhotoUrl!),
                             ),

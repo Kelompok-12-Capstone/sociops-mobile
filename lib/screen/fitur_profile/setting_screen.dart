@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sociops/screen/fitur_profile/edit_profile_screen.dart';
 import 'package:sociops/screen/fitur_profile/help_screen.dart';
 import 'package:sociops/screen/fitur_profile/notification_screen.dart';
+import 'package:sociops/screen/login_screen.dart';
 import 'package:sociops/screen/profile_screen.dart';
 import 'package:sociops/screen/fitur_profile/security_screen.dart';
 
@@ -327,7 +328,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const ProfileScreen(),
+                                    builder: (context) => const LoginScreen(),
                                   ),
                                 );
                               },

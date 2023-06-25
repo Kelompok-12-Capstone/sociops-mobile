@@ -154,13 +154,13 @@ class _CodePaymentScreenState extends State<CodePaymentScreen> {
                   child: Column(
                     children: [
                       const SizedBox(height: 16),
-                      Text(
-                        '${widget.selectedPaymentMethod}',
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
+                      // Text(
+                      //   '${widget.selectedPaymentMethod}',
+                      //   style: GoogleFonts.inter(
+                      //     fontWeight: FontWeight.w600,
+                      //     fontSize: 16,
+                      //   ),
+                      // ),
                       const SizedBox(height: 16),
                       Text(
                         'Kode Transaksi',
