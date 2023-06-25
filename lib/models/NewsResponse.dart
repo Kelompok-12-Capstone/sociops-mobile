@@ -24,8 +24,8 @@ class NewsResponse {
 
 class Datum {
     Author author;
-    int? categoryId;
-    CategoryName categoryName;
+    int categoryId;
+    String categoryName;
     DateTime createdAt;
     String description;
     int id;
@@ -35,7 +35,7 @@ class Datum {
 
     Datum({
         required this.author,
-        this.categoryId,
+        required this.categoryId,
         required this.categoryName,
         required this.createdAt,
         required this.description,
@@ -48,7 +48,7 @@ class Datum {
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         author: authorValues.map[json["author"]]!,
         categoryId: json["category_id"],
-        categoryName: categoryNameValues.map[json["category_name"]]!,
+        categoryName: json["category_name"],
         createdAt: DateTime.parse(json["created_at"]),
         description: json["description"],
         id: json["id"],
@@ -60,7 +60,7 @@ class Datum {
     Map<String, dynamic> toJson() => {
         "author": authorValues.reverse[author],
         "category_id": categoryId,
-        "category_name": categoryNameValues.reverse[categoryName],
+        "category_name": categoryName,
         "created_at": createdAt.toIso8601String(),
         "description": description,
         "id": id,
@@ -70,20 +70,11 @@ class Datum {
     };
 }
 
-enum Author { WILDAN_R, SKILLED_UP_LIFE, JOHN_DOE }
+enum Author { NAILUL_IZAH, PAK_JOHN }
 
 final authorValues = EnumValues({
-    "John Doe": Author.JOHN_DOE,
-    "SkilledUp Life": Author.SKILLED_UP_LIFE,
-    "Wildan R": Author.WILDAN_R
-});
-
-enum CategoryName { EMPTY, PENDIDIKAN, LINGKUNGAN }
-
-final categoryNameValues = EnumValues({
-    "": CategoryName.EMPTY,
-    "Lingkungan": CategoryName.LINGKUNGAN,
-    "Pendidikan": CategoryName.PENDIDIKAN
+    "Nailul Izah": Author.NAILUL_IZAH,
+    "Pak John": Author.PAK_JOHN
 });
 
 class EnumValues<T> {

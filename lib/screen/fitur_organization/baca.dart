@@ -169,6 +169,27 @@ class CustomFollowButton extends StatelessWidget {
               style: Styles.result5,
             ),
             const SizedBox(height: 8),
+            Positioned(
+              left: 5,
+              bottom: 8,
+              child: Container(
+                width: 83,
+                height: 22,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32.0),
+                  color: ColorStyle().buttonColor,
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    data.categoryName.toString(),
+                    textAlign: TextAlign.center,
+                    style: Styles.Result,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
             Text(
               '$formattedCreatedAt',
               style: Styles.result6,

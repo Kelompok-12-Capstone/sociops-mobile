@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sociops/screen/fitur_campaign/buat_campaign.dart';
 import 'package:sociops/screen/fitur_donation/detail_donate_screen.dart';
@@ -1568,6 +1567,36 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                   child: Image.asset(
                                                     'assets/fundraising.png',
                                                     fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                left: 18,
+                                                bottom: 8,
+                                                child: Container(
+                                                  width: 83,
+                                                  height: 22,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            32.0),
+                                                    color: ColorStyle()
+                                                        .buttonColor,
+                                                  ),
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'Fundraising',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: GoogleFonts.inter(
+                                                        color: const Color(
+                                                            0xFF444CE7),
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),

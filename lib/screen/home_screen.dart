@@ -1665,15 +1665,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       width: 240,
                                                       height: 44,
                                                       child: TextButton(
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const Baca()),
-                                                          );
-                                                        },
+                                                        onPressed: () {},
                                                         style: ButtonStyle(
                                                           backgroundColor:
                                                               MaterialStateProperty
@@ -1856,15 +1848,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       width: 240,
                                                       height: 44,
                                                       child: TextButton(
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const Baca()),
-                                                          );
-                                                        },
+                                                        onPressed: () {},
                                                         style: ButtonStyle(
                                                           backgroundColor:
                                                               MaterialStateProperty
@@ -2047,15 +2031,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       width: 240,
                                                       height: 44,
                                                       child: TextButton(
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const Baca()),
-                                                          );
-                                                        },
+                                                        onPressed: () {},
                                                         style: ButtonStyle(
                                                           backgroundColor:
                                                               MaterialStateProperty

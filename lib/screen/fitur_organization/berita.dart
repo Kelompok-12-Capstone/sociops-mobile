@@ -26,7 +26,8 @@ class _BeritaState extends State<Berita> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => Baca(data: data, selectedId: data.id)),
+        builder: (context) => Baca(data: data, selectedId: data.id),
+      ),
     );
   }
 
@@ -85,6 +86,7 @@ class _BeritaState extends State<Berita> {
                           onChanged: (value) {
                             setState(() {
                               searchQuery = value;
+                              searchResults = _filterData(allData);
                             });
                             print('Search query: $value');
                           },
@@ -114,50 +116,46 @@ class _BeritaState extends State<Berita> {
                         );
                       } else if (snapshot.hasData) {
                         final data = snapshot.data as NewsResponse?;
-                        final List<Datum> displayedData =
-                            searchResults.isNotEmpty
-                                ? searchResults
-                                : data?.data ?? [];
                         if (data != null) {
                           allData = data.data;
-                          searchResults = _filterData(allData);
                         }
-
-                        return Container(
-                          height: 500,
-                          child: ListView.builder(
-                            itemCount: displayedData.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              final datum = displayedData[index];
-                              if (index == displayedData.length - 1) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: 32, left: 16, right: 16),
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: CustomFollowButton(
-                                      data: datum,
-                                      onPressed: () => _showDetails(datum),
+                        searchResults = _filterData(allData);
+                        if (searchResults.isEmpty) {
+                          return Container(
+                            alignment: Alignment.center,
+                            child: Image.asset('assets/search.png'),
+                          );
+                        } else {
+                          return Container(
+                            height: 500,
+                            child: ListView.builder(
+                              itemCount: searchResults.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                final datum = searchResults[index];
+                                if (index == searchResults.length - 1) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 32, left: 16, right: 16),
+                                    child: GestureDetector(
+                                      onTap: () => _showDetails(datum),
+                                      child: CustomFollowButton(data: datum),
                                     ),
-                                  ),
-                                );
-                              } else {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: 16, left: 5, right: 5),
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: CustomFollowButton(
-                                      data: datum,
-                                      onPressed: () => _showDetails(datum),
+                                  );
+                                } else {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 16, left: 5, right: 5),
+                                    child: GestureDetector(
+                                      onTap: () => _showDetails(datum),
+                                      child: CustomFollowButton(data: datum),
                                     ),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        );
+                                  );
+                                }
+                              },
+                            ),
+                          );
+                        }
                       }
                     }
                     return Center(
@@ -224,9 +222,9 @@ class _CategoryBoxState extends State<CategoryBox> {
 
 class CustomFollowButton extends StatelessWidget {
   final Datum data;
-  final VoidCallback onPressed;
 
-  CustomFollowButton({required this.data, required this.onPressed});
+  CustomFollowButton({required this.data});
+
   String _formatCreatedAt(DateTime createdAt) {
     final now = DateTime.now();
     final difference = now.difference(createdAt);
@@ -268,27 +266,57 @@ class CustomFollowButton extends StatelessWidget {
               child: SizedBox(
                 width: 100,
                 height: 100,
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8),
-                      bottomLeft: Radius.circular(8),
+                child: Stack(
+                  children: [
+                    Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                        ),
+                        side: BorderSide(
+                          width: 1,
+                          color: AppColors.Kotak,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0, top: 0),
+                            child: SizedBox(
+                              width: 94,
+                              height: 94,
+                              child: Image.network(
+                                data.photoUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 5,
+                            bottom: 8,
+                            child: Container(
+                              width: 83,
+                              height: 22,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(32.0),
+                                color: ColorStyle().buttonColor,
+                              ),
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  data.categoryName.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: Styles.Result,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    side: BorderSide(
-                      width: 1,
-                      color: AppColors.Kotak,
-                    ),
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      print(data.photoUrl);
-                    },
-                    child: Image.network(
-                      data.photoUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -315,7 +343,7 @@ class CustomFollowButton extends StatelessWidget {
                       style: Styles.result9,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
+                      textAlign: TextAlign.left,
                     ),
                     SizedBox(height: 8),
                     Text(
@@ -329,7 +357,15 @@ class CustomFollowButton extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(bottom: 8),
                       child: GestureDetector(
-                        onTap: onPressed,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  Baca(data: data, selectedId: data.id),
+                            ),
+                          );
+                        },
                         child: Container(
                           height: 40,
                           decoration: BoxDecoration(

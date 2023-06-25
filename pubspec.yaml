@@ -24,6 +24,10 @@ dependencies:
   intl: ^0.18.1
   image_picker: ^0.8.9
   giff_dialog: ^1.0.1
+  dio: ^5.1.1
+  recase: ^4.1.0
+  http: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:
