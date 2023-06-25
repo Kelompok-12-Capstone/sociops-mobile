@@ -16,6 +16,8 @@ import 'package:video_player/video_player.dart';
 import '../../model/model_campaign.dart';
 import '../../service/campaign_service/campaign_service.dart';
 import '../../service/campaign_service/volunteer_service.dart';
+import '../fitur_volunteer/detail_volunter_home.dart';
+import 'componen_home/all_video_screen.dart';
 import 'componen_home/berita_home.dart';
 import 'componen_home/program_list.dart';
 
@@ -27,17 +29,23 @@ class HomeKhusus extends StatefulWidget {
 }
 
 class _HomeKhususState extends State<HomeKhusus> {
-  ////////////////////////
   List<VideoPlayerController?> _controllers = [];
   List<String> videoUrls = [];
 
   final VolunteerService volunteer = VolunteerService();
 
   bool isFollowing = false;
+  bool isFollowing2 = false;
 
   void toggleFollow() {
     setState(() {
       isFollowing = !isFollowing;
+    });
+  }
+
+  void toggleFollow2() {
+    setState(() {
+      isFollowing2 = !isFollowing2;
     });
   }
 
@@ -399,7 +407,14 @@ class _HomeKhususState extends State<HomeKhusus> {
                                               width: 500,
                                               height: 44,
                                               child: TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DonationScreen()),
+                                                  );
+                                                },
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStateProperty.all<
@@ -675,7 +690,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                     ),
                                                   ),
                                                   child: Text(
-                                                    '1 Aksi = ${datum2.totalActionDonation.toString()}',
+                                                    '1 Aksi = Rp${datum2.totalActionDonation.toString()}',
                                                     style: GoogleFonts.inter(
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -708,8 +723,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    datum2.targetDonation
-                                                        .toString(),
+                                                    'Rp${datum2.targetDonation.toString()}',
                                                     style: GoogleFonts.inter(
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -1066,25 +1080,35 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                 ),
                                               ),
                                               const SizedBox(height: 8),
-                                              Text(
-                                                datum31.title,
-                                                style: GoogleFonts.inter(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 16,
-                                                ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 2,
-                                              ),
-                                              const SizedBox(height: 8),
                                               Container(
+                                                alignment: Alignment.centerLeft,
+                                                margin: const EdgeInsets.only(
+                                                    right: 140),
                                                 child: Text(
-                                                  datum31.description,
+                                                  datum31.title,
                                                   style: GoogleFonts.inter(
-                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
                                                   ),
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 8),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    right: 16),
+                                                child: Text(
+                                                  datum31.description,
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.left,
                                                 ),
                                               ),
                                               const SizedBox(height: 16),
@@ -1097,7 +1121,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              const DetailVolunteer()),
+                                                              DetailVolunteerHome()),
                                                     );
                                                   },
                                                   style: ButtonStyle(
@@ -1184,12 +1208,12 @@ class _HomeKhususState extends State<HomeKhusus> {
                                             ),
                                             TextButton(
                                               onPressed: () {
-                                                // Navigator.push(
-                                                //   context,
-                                                //   MaterialPageRoute(
-                                                //       builder: (context) =>
-                                                //           const Berita()),
-                                                // );
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          AllVideoScreen()),
+                                                );
                                               },
                                               child: Text(
                                                 'LIHAT SEMUA',
@@ -1415,7 +1439,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             .spaceBetween,
                                                     children: [
                                                       SizedBox(
-                                                        width: 182,
+                                                        width: 164,
                                                         height: 44,
                                                         child: TextButton(
                                                           onPressed: () {
@@ -1460,43 +1484,43 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                        width: 164,
+                                                         width: 164,
                                                         height: 44,
-                                                        child: TextButton(
-                                                          onPressed: () {},
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                MaterialStateProperty
-                                                                    .all<Color>(
-                                                              isFollowing
-                                                                  ? ColorStyle()
-                                                                      .kotakColor
-                                                                  : ColorStyle()
-                                                                      .primaryblue,
+                                                        child: GestureDetector(
+                                                          onTap: toggleFollow,
+                                                          child: Container(
+                                                            height: 40,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: isFollowing
+                                                                  ? AppColors
+                                                                      .Button
+                                                                  : AppColors
+                                                                      .arrowColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20),
                                                             ),
-                                                            shape: MaterialStateProperty
-                                                                .all<
-                                                                    RoundedRectangleBorder>(
-                                                              RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            32.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          child: Text(
-                                                            isFollowing
-                                                                ? 'Mengikuti'
-                                                                : 'Ikuti',
-                                                            style: GoogleFonts
-                                                                .inter(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 14,
-                                                              color:
-                                                                  Colors.white,
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  isFollowing
+                                                                             ? 'Mengikuti'
+                                                                      : 'Ikuti',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: isFollowing
+                                                                        ? Colors
+                                                                            .blue
+                                                                        : AppColors
+                                                                            .Button,
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),
@@ -1655,43 +1679,43 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                        width: 164,
+                                                         width: 164,
                                                         height: 44,
-                                                        child: TextButton(
-                                                          onPressed: () {},
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                MaterialStateProperty
-                                                                    .all<Color>(
-                                                              isFollowing
-                                                                  ? ColorStyle()
-                                                                      .kotakColor
-                                                                  : ColorStyle()
-                                                                      .primaryblue,
+                                                        child: GestureDetector(
+                                                          onTap: toggleFollow2,
+                                                          child: Container(
+                                                            height: 40,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: isFollowing2
+                                                                  ? AppColors
+                                                                      .Button
+                                                                  : AppColors
+                                                                      .arrowColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20),
                                                             ),
-                                                            shape: MaterialStateProperty
-                                                                .all<
-                                                                    RoundedRectangleBorder>(
-                                                              RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            32.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          child: Text(
-                                                            isFollowing
-                                                                ? 'Ikuti'
-                                                                : 'Mengikuti',
-                                                            style: GoogleFonts
-                                                                .inter(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 14,
-                                                              color: ColorStyle()
-                                                                  .backgroundfield,
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  isFollowing2
+                                                                      ? 'Mengikuti'
+                                                                      : 'Ikuti',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: isFollowing2
+                                                                        ? Colors
+                                                                            .blue
+                                                                        : AppColors
+                                                                            .Button,
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),

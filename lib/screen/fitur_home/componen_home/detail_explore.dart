@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
-import 'package:sociops/screen/fitur_donation/select_payment_screen.dart';
-import 'package:sociops/style/font_style.dart';
 
-import '../../model/model_fundaraising.dart';
-import '../../model/model_volunteer.dart';
+import '../../../model/model_campaign.dart';
 
-class DetailVolunteerFixScreen extends StatefulWidget {
+
+class DetailEksplore extends StatefulWidget {
   final String? totalAmountCollection;
   final String? title;
   final String? image;
@@ -19,14 +17,13 @@ class DetailVolunteerFixScreen extends StatefulWidget {
   final String? video;
   final String? organizerPhotoUrl;
 
-  const DetailVolunteerFixScreen(
-      {super.key,
-      this.totalAmountCollection,
+  DetailEksplore(
+      {this.totalAmountCollection,
       this.title,
       this.image,
       this.location,
       this.description,
-      required Volunteer datum,
+      required Datum datum,
       this.categoryName,
       this.totalActiondonation,
       this.organizerName,
@@ -34,10 +31,10 @@ class DetailVolunteerFixScreen extends StatefulWidget {
       this.organizerPhotoUrl});
 
   @override
-  State<DetailVolunteerFixScreen> createState() => _DetailFundaraisingState();
+  State<DetailEksplore> createState() => _DetailEksploreState();
 }
 
-class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
+class _DetailEksploreState extends State<DetailEksplore> {
   bool isBookmarked = false;
   @override
   Widget build(BuildContext context) {
@@ -94,32 +91,40 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
               children: [
                 Image.network(widget.image!),
                 const SizedBox(height: 8),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.only(right: 140),
-                  child: Text(
-                    widget.title!,
-                    style: GoogleFonts.inter(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                Text(
+                  widget.title!,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Container(
-                  margin: const EdgeInsets.only(right: 16),
-                  child: Text(
-                    widget.description!,
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.totalAmountCollection!,
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    textAlign: TextAlign.left,
-                  ),
+                    Text(
+                      '72%',
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                const LinearProgressIndicator(
+                  backgroundColor: Color(0XFFFEF3F2),
+                  color: Color(0XFFD92D20),
+                  value: 72 / 100,
+                  minHeight: 12,
                 ),
                 const SizedBox(height: 20),
                 SingleChildScrollView(
@@ -310,40 +315,36 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(12),
-                            child: Image.asset(
-                              'assets/logo_notif.png',
-                              width: 56,
-                              height: 56,
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(12),
+                              child: Icon(Icons.alarm),
+                              // child: Image.asset(
+                              //   'assets/logo_notif.png',
+                              //   width: 56,
+                              //   height: 56,
+                              // ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 170,
-                                  height: 54,
-                                  child: Text(
-                                    'Nyalakan notifikasi Anda untuk mendapatkan informasi terbaru dari tantangan ini.',
-                                    style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      color: const Color(0xFF444CE7),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                             Flexible(
+              child: Container(
+                // alignment: Alignment.center,
+                child: Text(
+                  'Nyalakan notifikasi Anda untuk mendapatkan informasi terbaru dari tantangan ini.',
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: const Color(0xFF444CE7),
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       Container(
                         alignment: Alignment.center,
@@ -382,16 +383,6 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                 const SizedBox(height: 16),
                 const Divider(),
                 const SizedBox(height: 16),
-                Text(
-                  'Promotion videos',
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(height: 32),
-                Image.asset('assets/video.png'),
-                const SizedBox(height: 16),
                 ReadMoreText(
                   widget.description!,
                   trimLines: 4,
@@ -429,14 +420,7 @@ class _DetailFundaraisingState extends State<DetailVolunteerFixScreen> {
                   ),
                 ),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SelectPaymentScreen(),
-                  ),
-                );
-              },
+              onPressed: () {},
               child: Text(
                 'Donasi sekarang',
                 style: GoogleFonts.inter(
