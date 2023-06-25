@@ -17,8 +17,9 @@ class DetailFundaraising extends StatefulWidget {
   final String? video;
   final String? organizerPhotoUrl;
 
-  DetailFundaraising(
-      {this.totalAmountCollection,
+  const DetailFundaraising(
+      {super.key,
+      this.totalAmountCollection,
       this.title,
       this.image,
       this.location,

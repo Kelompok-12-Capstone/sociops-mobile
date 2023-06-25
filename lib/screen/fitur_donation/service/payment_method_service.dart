@@ -4,7 +4,7 @@ class ApiPaymentMethodService {
   static const String apiUrl =
       'https://sociops-backend-production.up.railway.app/payment-methods';
   static const String accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MSIsIm5hbWUiOiJCdWRpIEFsdmFyZXoiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTY4NzYyODc0NH0.Z9-SnY8VG4SPtWW3RuK4HeIpysVjohsnaqDB3DEyH30';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJuYW1lIjoiQnVkaSIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTY4NzcxNDQwNH0.uaVjlTQE3P_DzJZ8r4y5PllJ-lRVauHqtIv0VPspDsE';
 
   static final Dio _dio = Dio();
 

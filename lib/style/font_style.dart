@@ -136,4 +136,10 @@ class Styles {
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
+  static const TextStyle Result = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: Color(0xFF444CE7),
+  );
 }

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       title: 'Sociops',
       theme: ThemeData(),
       debugShowCheckedModeBanner: false,
-      home: const BottomNavbarScreen(),
+      home: const SplashScreen(),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:sociops/style/font_style.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class Berita extends StatefulWidget {
-  const Berita({super.key});
+  const Berita();
 
   @override
   _BeritaState createState() => _BeritaState();
@@ -26,7 +26,8 @@ class _BeritaState extends State<Berita> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => Baca(data: data, selectedId: data.id)),
+        builder: (context) => Baca(data: data, selectedId: data.id),
+      ),
     );
   }
 
@@ -53,7 +54,7 @@ class _BeritaState extends State<Berita> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Berita Terbaru',
           style: Styles.organizerTextStyle,
         ),
@@ -64,94 +65,89 @@ class _BeritaState extends State<Berita> {
       body: Container(
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        height: 48,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          color: const Color(0XFFF9FAFB),
-                          borderRadius: BorderRadius.circular(56),
-                        ),
-                        child: TextField(
-                          onChanged: (value) {
-                            setState(() {
-                              searchQuery = value;
-                            });
-                            print('Search query: $value');
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Cari',
-                            prefixIcon: const Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(23),
-                              borderSide: BorderSide.none,
-                            ),
+          padding: const EdgeInsets.only(left: 8, top: 16),
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      height: 48,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        color: const Color(0XFFF9FAFB),
+                        borderRadius: BorderRadius.circular(56),
+                      ),
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            searchQuery = value;
+                            searchResults = _filterData(allData);
+                          });
+                          print('Search query: $value');
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Cari',
+                          prefixIcon: const Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(23),
+                            borderSide: BorderSide.none,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 16),
-                FutureBuilder(
-                  builder: (ctx, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text(
-                            '${snapshot.error} occurred',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        );
-                      } else if (snapshot.hasData) {
-                        final data = snapshot.data as NewsResponse?;
-                        final List<Datum> displayedData =
-                            searchResults.isNotEmpty
-                                ? searchResults
-                                : data?.data ?? [];
-                        if (data != null) {
-                          allData = data.data;
-                          searchResults = _filterData(allData);
-                        }
-
+              ),
+              const SizedBox(height: 16),
+              FutureBuilder(
+                builder: (ctx, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          '${snapshot.error} occurred',
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      );
+                    } else if (snapshot.hasData) {
+                      final data = snapshot.data as NewsResponse?;
+                      if (data != null) {
+                        allData = data.data;
+                      }
+                      searchResults = _filterData(allData);
+                      if (searchResults.isEmpty) {
                         return Container(
-                          height: 500,
+                          alignment: Alignment.center,
+                          child: Image.asset('assets/search.png'),
+                        );
+                      } else {
+                        return SizedBox(
+                          height: 768,
                           child: ListView.builder(
-                            itemCount: displayedData.length,
+                            itemCount: searchResults.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              final datum = displayedData[index];
-                              if (index == displayedData.length - 1) {
+                              final datum = searchResults[index];
+                              if (index == searchResults.length - 1) {
                                 return Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       bottom: 32, left: 16, right: 16),
                                   child: GestureDetector(
-                                    onTap: () {},
-                                    child: CustomFollowButton(
-                                      data: datum,
-                                      onPressed: () => _showDetails(datum),
-                                    ),
+                                    onTap: () => _showDetails(datum),
+                                    child: CustomFollowButton(data: datum),
                                   ),
                                 );
                               } else {
                                 return Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       bottom: 16, left: 5, right: 5),
                                   child: GestureDetector(
-                                    onTap: () {},
-                                    child: CustomFollowButton(
-                                      data: datum,
-                                      onPressed: () => _showDetails(datum),
-                                    ),
+                                    onTap: () => _showDetails(datum),
+                                    child: CustomFollowButton(data: datum),
                                   ),
                                 );
                               }
@@ -160,14 +156,14 @@ class _BeritaState extends State<Berita> {
                         );
                       }
                     }
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                  future: NewsService().fetchNews(),
-                ),
-              ],
-            ),
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                future: NewsService().fetchNews(),
+              ),
+            ],
           ),
         ),
       ),
@@ -180,6 +176,7 @@ class CategoryBox extends StatefulWidget {
   final Color color;
 
   const CategoryBox({
+    super.key,
     required this.text,
     required this.color,
   });
@@ -224,9 +221,9 @@ class _CategoryBoxState extends State<CategoryBox> {
 
 class CustomFollowButton extends StatelessWidget {
   final Datum data;
-  final VoidCallback onPressed;
 
-  CustomFollowButton({required this.data, required this.onPressed});
+  CustomFollowButton({required this.data});
+
   String _formatCreatedAt(DateTime createdAt) {
     final now = DateTime.now();
     final difference = now.difference(createdAt);
@@ -253,7 +250,7 @@ class CustomFollowButton extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: AppColors.Kotak,
@@ -264,35 +261,65 @@ class CustomFollowButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 8, right: 16),
+              padding: const EdgeInsets.only(top: 8, bottom: 8, right: 16),
               child: SizedBox(
                 width: 100,
                 height: 100,
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8),
-                      bottomLeft: Radius.circular(8),
+                child: Stack(
+                  children: [
+                    Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomLeft: Radius.circular(8),
+                        ),
+                        side: BorderSide(
+                          width: 1,
+                          color: AppColors.Kotak,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0, top: 0),
+                            child: SizedBox(
+                              width: 94,
+                              height: 94,
+                              child: Image.network(
+                                data.photoUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 5,
+                            bottom: 8,
+                            child: Container(
+                              width: 83,
+                              height: 22,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(32.0),
+                                color: ColorStyle().buttonColor,
+                              ),
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  data.categoryName.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: Styles.Result,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    side: BorderSide(
-                      width: 1,
-                      color: AppColors.Kotak,
-                    ),
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      print(data.photoUrl);
-                    },
-                    child: Image.network(
-                      data.photoUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Container(
               width: 256,
               height: 150,
@@ -309,15 +336,15 @@ class CustomFollowButton extends StatelessWidget {
                       textAlign: TextAlign.start,
                       style: Styles.result8,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       formattedTitle,
                       style: Styles.result9,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
+                      textAlign: TextAlign.left,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       data.description.toString(),
                       style: Styles.result10,
@@ -325,18 +352,26 @@ class CustomFollowButton extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: GestureDetector(
-                        onTap: onPressed,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  Baca(data: data, selectedId: data.id),
+                            ),
+                          );
+                        },
                         child: Container(
                           height: 40,
                           decoration: BoxDecoration(
                             color: AppColors.Button,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(width: 8),

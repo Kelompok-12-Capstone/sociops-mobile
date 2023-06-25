@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sociops/screen/fitur_donation/detail_donate_screen.dart';
 import 'package:sociops/screen/fitur_donation/detail_donation_screen.dart';
+import 'package:sociops/screen/fitur_donation/donation_screen.dart';
 import 'package:sociops/screen/fitur_home/bookmark_screen.dart';
 import 'package:sociops/screen/fitur_organization/berita.dart';
 import 'package:sociops/screen/fitur_organization/organization.dart';
@@ -31,6 +32,14 @@ class _HomeKhususState extends State<HomeKhusus> {
   List<String> videoUrls = [];
 
   final VolunteerService volunteer = VolunteerService();
+
+  bool isFollowing = false;
+
+  void toggleFollow() {
+    setState(() {
+      isFollowing = !isFollowing;
+    });
+  }
 
   @override
   void dispose() {
@@ -439,7 +448,41 @@ class _HomeKhususState extends State<HomeKhusus> {
                                         ),
                                         const SizedBox(height: 12),
                                         ProgamListHome(),
-                                        const SizedBox(height: 20),
+                                        const Divider(),
+                                        const SizedBox(height: 12),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Galang dana',
+                                              style: GoogleFonts.inter(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const DonationScreen()),
+                                                );
+                                              },
+                                              child: Text(
+                                                'LIHAT SEMUA',
+                                                style: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14,
+                                                  color:
+                                                      ColorStyle().primaryblue,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 12),
                                         Container(
                                           padding: const EdgeInsets.all(16),
                                           alignment: Alignment.center,
@@ -772,228 +815,6 @@ class _HomeKhususState extends State<HomeKhusus> {
                                           ],
                                         ),
                                         const SizedBox(height: 16),
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 16),
-                                                child: SizedBox(
-                                                  width: 94,
-                                                  height: 44,
-                                                  child: OutlinedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                        const Color(0xFFFFFFFF),
-                                                      ),
-                                                      shape: MaterialStateProperty
-                                                          .all<
-                                                              RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      26.0),
-                                                          side:
-                                                              const BorderSide(
-                                                            width: 1.5,
-                                                            color: Color(
-                                                                0xFF444CE7),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: Text(
-                                                      'Semua',
-                                                      style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: const Color(
-                                                            0xFF444CE7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 12),
-                                                child: SizedBox(
-                                                  width: 92,
-                                                  height: 44,
-                                                  child: OutlinedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                        const Color(0xFFFFFFFF),
-                                                      ),
-                                                      shape: MaterialStateProperty
-                                                          .all<
-                                                              RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      26.0),
-                                                          side: const BorderSide(
-                                                              width: 1.5,
-                                                              color: Color(
-                                                                  0xFF444CE7)),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: Text(
-                                                      'Umum',
-                                                      style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: const Color(
-                                                            0xFF444CE7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 12),
-                                                child: SizedBox(
-                                                  width: 106,
-                                                  height: 44,
-                                                  child: OutlinedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                        const Color(0xFFFFFFFF),
-                                                      ),
-                                                      shape: MaterialStateProperty
-                                                          .all<
-                                                              RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      26.0),
-                                                          side: const BorderSide(
-                                                              width: 1.5,
-                                                              color: Color(
-                                                                  0xFF444CE7)),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: Text(
-                                                      'Bencana',
-                                                      style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: const Color(
-                                                            0xFF444CE7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 12),
-                                                child: SizedBox(
-                                                  width: 123,
-                                                  height: 44,
-                                                  child: OutlinedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                        const Color(0xFFFFFFFF),
-                                                      ),
-                                                      shape: MaterialStateProperty
-                                                          .all<
-                                                              RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      26.0),
-                                                          side: const BorderSide(
-                                                              width: 1.5,
-                                                              color: Color(
-                                                                  0xFF444CE7)),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: Text(
-                                                      'Pendidikan',
-                                                      style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: const Color(
-                                                            0xFF444CE7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 12),
-                                                child: SizedBox(
-                                                  width: 119,
-                                                  height: 44,
-                                                  child: OutlinedButton(
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                        const Color(0xFFFFFFFF),
-                                                      ),
-                                                      shape: MaterialStateProperty
-                                                          .all<
-                                                              RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      26.0),
-                                                          side: const BorderSide(
-                                                              width: 1.5,
-                                                              color: Color(
-                                                                  0xFF444CE7)),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: Text(
-                                                      'Kesehatan',
-                                                      style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: const Color(
-                                                            0xFF444CE7),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20),
                                         Container(
                                           padding: const EdgeInsets.all(20),
                                           alignment: Alignment.center,
@@ -1363,12 +1184,12 @@ class _HomeKhususState extends State<HomeKhusus> {
                                             ),
                                             TextButton(
                                               onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const Berita()),
-                                                );
+                                                // Navigator.push(
+                                                //   context,
+                                                //   MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           const Berita()),
+                                                // );
                                               },
                                               child: Text(
                                                 'LIHAT SEMUA',
@@ -1647,8 +1468,11 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             backgroundColor:
                                                                 MaterialStateProperty
                                                                     .all<Color>(
-                                                              ColorStyle()
-                                                                  .kotakColor,
+                                                              isFollowing
+                                                                  ? ColorStyle()
+                                                                      .kotakColor
+                                                                  : ColorStyle()
+                                                                      .primaryblue,
                                                             ),
                                                             shape: MaterialStateProperty
                                                                 .all<
@@ -1662,15 +1486,17 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             ),
                                                           ),
                                                           child: Text(
-                                                            'Ikuti',
+                                                            isFollowing
+                                                                ? 'Mengikuti'
+                                                                : 'Ikuti',
                                                             style: GoogleFonts
                                                                 .inter(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
                                                               fontSize: 14,
-                                                              color: ColorStyle()
-                                                                  .backgroundfield,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),
@@ -1837,8 +1663,11 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             backgroundColor:
                                                                 MaterialStateProperty
                                                                     .all<Color>(
-                                                              ColorStyle()
-                                                                  .kotakColor,
+                                                              isFollowing
+                                                                  ? ColorStyle()
+                                                                      .kotakColor
+                                                                  : ColorStyle()
+                                                                      .primaryblue,
                                                             ),
                                                             shape: MaterialStateProperty
                                                                 .all<
@@ -1852,7 +1681,9 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             ),
                                                           ),
                                                           child: Text(
-                                                            'Ikuti',
+                                                            isFollowing
+                                                                ? 'Ikuti'
+                                                                : 'Mengikuti',
                                                             style: GoogleFonts
                                                                 .inter(
                                                               fontWeight:

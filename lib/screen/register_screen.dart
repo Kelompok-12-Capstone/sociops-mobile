@@ -31,13 +31,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final registerProvider = Provider.of<RegisterProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        leading: const BackButton(
-          color: Color(0XFF444CE7),
-        ),
-      ),
       body: Container(
         color: Colors.white,
         child: ListView(
@@ -161,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 270),
+                          const SizedBox(height: 230),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

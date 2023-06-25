@@ -1,9 +1,10 @@
-
 import 'package:dio/dio.dart';
 
 import 'model_berita.dart';
+
 class NewsService {
-  static const String apiUrl = 'https://sociops-backend-production.up.railway.app/news';
+  static const String apiUrl =
+      'https://sociops-backend-production.up.railway.app/news';
 
   final Dio _dio = Dio();
 
