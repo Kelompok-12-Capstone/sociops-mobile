@@ -1,0 +1,100 @@
+name: sociops
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^4.0.4
+  expandable: ^5.0.1
+  carousel_slider: ^4.2.1
+  getwidget: ^3.0.1
+  from_css_color: ^2.0.0
+  cupertino_icons: ^1.0.2
+  alert_dialog: ^1.0.1
+  cool_alert: ^2.0.1
+  quickalert: ^1.0.1
+  readmore: ^2.2.0
+  intl: ^0.18.1
+  image_picker: ^0.8.9
+  giff_dialog: ^1.0.1
+  shared_preferences: ^2.1.2
+  sqflite: ^2.2.8+4
+  path: ^1.8.3
+  email_validator: ^2.1.17
+  provider: ^6.0.5
+  get: ^4.6.5
+  http: ^0.13.3
+  url_launcher: ^6.1.11
+  video_player: ^2.6.1
+  file_picker: ^5.3.2
+  open_file: ^3.3.2
+  path_provider: ^2.0.15
+  logger: ^1.1.0
+  validators: ^3.0.0
+  dio: ^5.2.1+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+
+  - assets/
+  - assets/handoff/
+  - assets/handoff/foto/
+  - assets/handoff/icon/
+  - assets/create.png
+  - assets/house.png
+  - assets/home.png
+  - assets/search.png
+  - assets/result_image.png
+  - assets/bookmark.png
+  - assets/galang dana.png
+  - assets/volunteerr.png
+  - assets/galang dana page.png
+  - assets/volunteer page.png
+  - assets/foto profil.png
+  - assets/volunteer.png
+  - assets/campaign.png
+  - assets/komunitas.png
+  - assets/bookmark (2).png
+  - assets/fundraising.png
+  - assets/promosi.png
+  - assets/organizer.png
+  - assets/
+  - assets/handoff/
+  - assets/handoff/foto/
+  - assets/handoff/icon/
+  - assets/create.png
+  - assets/house.png
+  - assets/home.png
+  - assets/search.png
+  - assets/result_image.png
+  - assets/bookmark.png
+  - assets/galang dana.png
+  - assets/volunteerr.png
+  - assets/galang dana page.png
+  - assets/volunteer page.png
+  - assets/foto profil.png
+  - assets/volunteer.png
+  - assets/campaign.png
+  - assets/komunitas.png
+  - assets/bookmark (2).png
+  - assets/fundraising.png
+  - assets/promosi.png
+  - assets/organizer.png
+  - assets/give-love.png
+  - assets/community.png
+  - assets/hyundai.jpg
+  - assets/notifikasi.png
+  - assets/sepatu.png
+  - assets/sukses.png
