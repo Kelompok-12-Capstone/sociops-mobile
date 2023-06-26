@@ -979,7 +979,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                             const SizedBox(
                                                                 width: 8),
                                                             Container(
-                                                              width: 75,
+                                                              width: 100,
                                                               height: 25,
                                                               decoration:
                                                                   BoxDecoration(
@@ -1484,7 +1484,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                         width: 164,
+                                                        width: 164,
                                                         height: 44,
                                                         child: GestureDetector(
                                                           onTap: toggleFollow,
@@ -1509,7 +1509,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                               children: [
                                                                 Text(
                                                                   isFollowing
-                                                                             ? 'Mengikuti'
+                                                                      ? 'Mengikuti'
                                                                       : 'Ikuti',
                                                                   style:
                                                                       TextStyle(
@@ -1679,7 +1679,7 @@ class _HomeKhususState extends State<HomeKhusus> {
                                                         ),
                                                       ),
                                                       SizedBox(
-                                                         width: 164,
+                                                        width: 164,
                                                         height: 44,
                                                         child: GestureDetector(
                                                           onTap: toggleFollow2,
