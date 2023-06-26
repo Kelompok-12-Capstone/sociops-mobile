@@ -1,11 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sociops/screen/fitur_profile/edit_profile_screen.dart';
 import 'package:sociops/screen/fitur_profile/help_screen.dart';
 import 'package:sociops/screen/fitur_profile/notification_screen.dart';
 import 'package:sociops/screen/login_screen.dart';
-import 'package:sociops/screen/profile_screen.dart';
 import 'package:sociops/screen/fitur_profile/security_screen.dart';
+
+import '../../provider/user/save_token.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -323,14 +326,14 @@ class _SettingScreenState extends State<SettingScreen> {
                               child: const Text('Batal'),
                             ),
                             ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
-                                );
+                              onPressed: () async {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                    (route) => false);
+                                SharedPref.removeToken();
                               },
                               child: const Text('Keluar'),
                             ),

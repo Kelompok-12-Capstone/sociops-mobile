@@ -3,7 +3,7 @@ import 'package:sociops/model/berita/model_berita.dart';
 
 class NewsService {
   static const String apiUrl =
-      'https://sociops-backend-production.up.railway.app/news?page=1&page_size=100&filter_search=&sort=created_at_asc';
+      'https://sociops-backend-production.up.railway.app/news';
 
   final Dio _dio = Dio();
 

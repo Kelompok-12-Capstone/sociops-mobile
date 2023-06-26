@@ -21,11 +21,11 @@ abstract class VolunteerServices {
     String detailActionDonation,
     String type,
     String status,
-
   ) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkwIiwibmFtZSI6IlRlc3QgVGVzdCIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTY4NzY0ODI3MH0.SUG4PvXKdUVqUj2qb6r2tQDI9jboT75arVuotXBE4iM';
+      const token =
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJuYW1lIjoiQnVkaSIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTY4NzgwODI1MX0.CXIlsCu0o_qOy_UR1SeqU_XuV7QVqg1QvSXrDUjfHI4';
       prefs.setString('token', token);
       // final token = prefs.getString('token');
 
@@ -37,10 +37,13 @@ abstract class VolunteerServices {
       final response = await Dio().post(
         'https://sociops-backend-production.up.railway.app/campaigns',
         data: {
-          "title": "[DATA TEST] Inovasi untuk Masa Depan: Mendukung Riset dan Teknologi",
+          "title":
+              "[DATA TEST] Inovasi untuk Masa Depan: Mendukung Riset dan Teknologi",
           "category_id": 12,
-          "description": "[DATA TEST] Kami berkomitmen untuk mendukung riset dan teknologi sebagai sumber inovasi untuk masa depan. Kami memfasilitasi pengembangan penelitian, pembiayaan startup teknologi, dan kolaborasi antara ilmuwan, insinyur, dan komunitas teknologi untuk menciptakan solusi berkelanjutan.",
-          "story": "[DATA TEST] Kisah kami dimulai ketika kami melihat potensi besar dalam riset dan teknologi untuk mengatasi masalah global. Kami merasa terpanggil untuk menyediakan platform dan sumber daya bagi ilmuwan, insinyur, dan komunitas teknologi untuk berkolaborasi, berinovasi, dan mewujudkan solusi yang berkelanjutan.",
+          "description":
+              "[DATA TEST] Kami berkomitmen untuk mendukung riset dan teknologi sebagai sumber inovasi untuk masa depan. Kami memfasilitasi pengembangan penelitian, pembiayaan startup teknologi, dan kolaborasi antara ilmuwan, insinyur, dan komunitas teknologi untuk menciptakan solusi berkelanjutan.",
+          "story":
+              "[DATA TEST] Kisah kami dimulai ketika kami melihat potensi besar dalam riset dan teknologi untuk mengatasi masalah global. Kami merasa terpanggil untuk menyediakan platform dan sumber daya bagi ilmuwan, insinyur, dan komunitas teknologi untuk berkolaborasi, berinovasi, dan mewujudkan solusi yang berkelanjutan.",
           "proposal": "XXX",
           "image": "XXX",
           "video": "XXX",
@@ -51,7 +54,8 @@ abstract class VolunteerServices {
           "end_date": "2023-12-14T14:56:18.732Z",
           "target_donation": 10000000,
           "total_action_donation": 50000,
-          "detail_action_donation": "[DATA TEST] Setiap donasi akan digunakan untuk mendukung riset inovatif, pembiayaan startup teknologi, dan program kolaborasi di bidang riset dan teknologi.",
+          "detail_action_donation":
+              "[DATA TEST] Setiap donasi akan digunakan untuk mendukung riset inovatif, pembiayaan startup teknologi, dan program kolaborasi di bidang riset dan teknologi.",
           "type": "FUNDRAISING",
           "status": "",
         },
@@ -79,13 +83,13 @@ abstract class VolunteerServices {
           status: response.data['status'],
         );
       }
-      
+
       return null;
     } catch (e) {
       // ignore: deprecated_member_use
       if (e is DioError) {
         print(e.response?.data);
-      return null;
+        return null;
       }
     }
     return null;

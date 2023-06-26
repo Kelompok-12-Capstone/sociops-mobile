@@ -87,7 +87,7 @@ class _BeritaState extends State<Berita> {
                             searchQuery = value;
                             searchResults = _filterData(allData);
                           });
-                          print('Search query: $value');
+                          // print('Search query: $value');
                         },
                         decoration: InputDecoration(
                           hintText: 'Cari',
